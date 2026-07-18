@@ -1,4 +1,5 @@
-import { Suspense, lazy, useEffect, useState } from "react";
+import { Suspense, lazy, useEffect, useRef, useState } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Github, Linkedin, Mail, FileDown, Terminal } from "lucide-react";
 
 const Spline = lazy(() => import("@splinetool/react-spline"));
@@ -90,22 +91,34 @@ export function Hero() {
   useEffect(() => setMounted(true), []);
   const { out, done } = useTyped([LINE_1, LINE_2]);
 
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+  const rotateY = useTransform(scrollYProgress, [0, 1], [0, 15]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
+
   const line1Active = out[0].length < LINE_1.length;
   const line2Active = !line1Active && !done;
 
   return (
     <section
+      ref={sectionRef}
       id="top"
       className="relative min-h-screen w-full overflow-hidden"
     >
-      {/* Spline background */}
-      <div className="absolute inset-0 z-0">
+      {/* Spline background — scroll-linked wrapper */}
+      <motion.div
+        className="absolute inset-0 z-0"
+        style={{ rotateY, scale, transformPerspective: 1000, transformOrigin: "center center" }}
+      >
         {mounted && (
           <Suspense fallback={null}>
             <Spline scene="https://prod.spline.design/JWMigd3B99qNewCQ/scene.splinecode" />
           </Suspense>
         )}
-      </div>
+      </motion.div>
 
       {/* Overlays for readability */}
       <div className="pointer-events-none absolute inset-0 z-[1] grid-bg opacity-25" />

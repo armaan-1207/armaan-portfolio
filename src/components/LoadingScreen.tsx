@@ -1,6 +1,4 @@
-import { Suspense, lazy, useEffect, useState } from "react";
-
-const Spline = lazy(() => import("@splinetool/react-spline"));
+import { useEffect, useState } from "react";
 
 const LINES = [
   "Initializing systems...",
@@ -18,7 +16,7 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
   const [typed, setTyped] = useState("");
   const [progress, setProgress] = useState(0);
 
-  // Progress bar: 0 -> 100 across TOTAL_MS
+  // Progress bar
   useEffect(() => {
     const start = performance.now();
     let raf = 0;
@@ -32,7 +30,7 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
     return () => cancelAnimationFrame(raf);
   }, [onDone]);
 
-  // Type out each line
+  // Typing
   useEffect(() => {
     if (lineIdx >= LINES.length) return;
     const full = LINES[lineIdx];
@@ -55,15 +53,69 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
 
   return (
     <div className="fixed inset-0 flex flex-col items-center justify-center bg-[#0a0e14] px-6 scanlines">
-      {/* Spline 3D — centered */}
-      <div className="relative h-[280px] w-full max-w-[520px] sm:h-[360px]">
-        <Suspense fallback={null}>
-          <Spline scene="https://prod.spline.design/H4fMRS57XunVC-4A/scene.splinecode" />
-        </Suspense>
+      {/* Animated shield */}
+      <div className="relative flex h-56 w-56 items-center justify-center sm:h-64 sm:w-64">
+        {/* Radar ping rings */}
+        <span className="ls-ring" />
+        <span className="ls-ring ls-ring-delay" />
+
+        {/* Pulsing shield */}
+        <div className="ls-shield relative h-40 w-40 sm:h-48 sm:w-48">
+          <svg
+            viewBox="0 0 100 110"
+            className="h-full w-full"
+            style={{
+              filter:
+                "drop-shadow(0 0 6px #00ff9d) drop-shadow(0 0 18px rgba(0,255,157,0.55))",
+            }}
+          >
+            <defs>
+              <linearGradient id="ls-scan" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="rgba(0,255,157,0)" />
+                <stop offset="50%" stopColor="rgba(0,255,157,0.55)" />
+                <stop offset="100%" stopColor="rgba(0,255,157,0)" />
+              </linearGradient>
+              <clipPath id="ls-shield-clip">
+                <path d="M50 4 L92 22 L92 58 C92 82 74 98 50 106 C26 98 8 82 8 58 L8 22 Z" />
+              </clipPath>
+            </defs>
+
+            {/* Hex/shield outline */}
+            <path
+              d="M50 4 L92 22 L92 58 C92 82 74 98 50 106 C26 98 8 82 8 58 L8 22 Z"
+              fill="none"
+              stroke="#00ff9d"
+              strokeWidth="2.5"
+              strokeLinejoin="round"
+            />
+
+            {/* Scan sweep, clipped to shield */}
+            <g clipPath="url(#ls-shield-clip)">
+              <rect
+                className="ls-scan-bar"
+                x="0"
+                y="-30"
+                width="100"
+                height="28"
+                fill="url(#ls-scan)"
+              />
+            </g>
+
+            {/* Checkmark */}
+            <path
+              d="M32 56 L46 70 L70 42"
+              fill="none"
+              stroke="#00ff9d"
+              strokeWidth="4"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </div>
       </div>
 
       {/* Terminal boot log */}
-      <div className="mt-6 w-full max-w-xl font-mono text-sm">
+      <div className="mt-8 w-full max-w-xl font-mono text-sm">
         <div className="mb-3 flex items-center gap-2 text-primary/80">
           <span className="inline-block h-1.5 w-1.5 rounded-full bg-primary animate-blink" />
           <span>root@secure</span>

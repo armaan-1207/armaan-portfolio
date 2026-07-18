@@ -163,6 +163,36 @@
   animation: scan 6s linear infinite;
 }
 
+/* LoadingScreen shield animations */
+@keyframes ls-shield-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+.ls-shield {
+  animation: ls-shield-pulse 2s ease-in-out infinite;
+}
+@keyframes ls-scan-sweep {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(140px); }
+}
+.ls-scan-bar {
+  animation: ls-scan-sweep 2s linear infinite;
+}
+@keyframes ls-ring-expand {
+  0% { transform: scale(0.6); opacity: 0.7; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+.ls-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  border: 1px solid rgba(0, 255, 157, 0.5);
+  animation: ls-ring-expand 2s ease-out infinite;
+}
+.ls-ring-delay {
+  animation-delay: 1s;
+}
+
 @keyframes glitch-shift {
   0%, 100% { transform: translate(0, 0); opacity: 0.85; }
   20% { transform: translate(-2px, 1px); }
