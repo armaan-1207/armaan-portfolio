@@ -411,3 +411,11 @@
     cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'><rect x='6' y='4' width='8' height='12' fill='%2300ff9d' opacity='0.85'/><rect x='6' y='4' width='8' height='12' fill='none' stroke='%2300ff9d' stroke-width='1.5'/></svg>") 10 10, pointer;
   }
 }
+
+@keyframes ls-denied-flash {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+.ls-denied-flash {
+  animation: ls-denied-flash 0.3s steps(2, end) infinite;
+}
