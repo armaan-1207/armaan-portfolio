@@ -1,4 +1,5 @@
-import { Suspense, lazy, useEffect, useState } from "react";
+import { Suspense, lazy, useEffect, useRef, useState } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Github, Linkedin, Mail, FileDown, Terminal } from "lucide-react";
 
 const Spline = lazy(() => import("@splinetool/react-spline"));
