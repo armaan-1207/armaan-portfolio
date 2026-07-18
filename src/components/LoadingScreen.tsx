@@ -98,7 +98,7 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
       setTimeout(() => {
         if (cancelled) return;
         setGlitch(true);
-        setTimeout(() => setGlitch(false), 120);
+        setTimeout(() => setGlitch(false), 150);
         schedule();
       }, delay);
     };
