@@ -94,7 +94,7 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
   useEffect(() => {
     let cancelled = false;
     const schedule = () => {
-      const delay = 1200 + Math.random() * 2200;
+      const delay = 4000 + Math.random() * 1000;
       setTimeout(() => {
         if (cancelled) return;
         setGlitch(true);
