@@ -1,24 +1,57 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
+import { LoadingScreen } from "@/components/LoadingScreen";
+import { Nav } from "@/components/Nav";
+import { Hero } from "@/components/Hero";
+import { About } from "@/components/About";
+import { Skills } from "@/components/Skills";
+import { Projects } from "@/components/Projects";
+import { CTFWriteups } from "@/components/CTFWriteups";
+import { Certifications } from "@/components/Certifications";
+import { Experience } from "@/components/Experience";
+import { Contact } from "@/components/Contact";
+import { Footer } from "@/components/Footer";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({
+    meta: [
+      { title: "alex_nakamura // offensive security researcher" },
+      {
+        name: "description",
+        content:
+          "Portfolio of Alex Nakamura — offensive security researcher, CTF player, and red-team engineer. Exploits, writeups, tools, and engagements.",
+      },
+      { property: "og:title", content: "alex_nakamura // offensive security researcher" },
+      {
+        property: "og:description",
+        content: "Exploits, CTF writeups, red-team tooling, and security research.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
+  component: Home,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+function Home() {
+  const [loading, setLoading] = useState(true);
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <>
+      {loading && <LoadingScreen onDone={() => setLoading(false)} />}
+      <div className="min-h-screen bg-[#0a0e14] text-foreground">
+        <Nav />
+        <main>
+          <Hero />
+          <About />
+          <Skills />
+          <Projects />
+          <CTFWriteups />
+          <Certifications />
+          <Experience />
+          <Contact />
+        </main>
+        <Footer />
+      </div>
+    </>
   );
 }
