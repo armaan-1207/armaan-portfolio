@@ -419,3 +419,47 @@
 .ls-denied-flash {
   animation: ls-denied-flash 0.3s steps(2, end) infinite;
 }
+
+/* About — hexagonal profile frame glow */
+@keyframes hex-pulse-glow {
+  0%, 100% { filter: drop-shadow(0 0 8px rgba(0,255,157,0.35)) drop-shadow(0 0 20px rgba(0,255,157,0.1)); }
+  50%       { filter: drop-shadow(0 0 22px rgba(0,255,157,0.7)) drop-shadow(0 0 44px rgba(0,217,255,0.25)); }
+}
+.hex-glow {
+  animation: hex-pulse-glow 3.5s ease-in-out infinite;
+}
+
+/* Terminal — blinking block cursor */
+.term-cursor {
+  display: inline-block;
+  width: 0.55em;
+  height: 1.05em;
+  background-color: #00ff9d;
+  vertical-align: text-bottom;
+  margin-left: 1px;
+  box-shadow: 0 0 6px rgba(0,255,157,0.9);
+  animation: blink 1s step-end infinite;
+}
+
+/* Card — 3D tilt hover glow boost */
+.tilt-card-inner {
+  transform-style: preserve-3d;
+}
+
+/* Timeline — node pulse */
+@keyframes node-ping {
+  0%   { transform: scale(1); opacity: 0.9; }
+  80%  { transform: scale(1.8); opacity: 0; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+.node-ping {
+  animation: node-ping 2.2s ease-out infinite;
+}
+
+/* Contact form — terminal focus ring */
+.term-input:focus {
+  outline: none;
+  border-color: rgba(0, 255, 157, 0.5);
+  box-shadow: 0 0 0 1px rgba(0, 255, 157, 0.25), 0 0 12px rgba(0, 255, 157, 0.1);
+}
+

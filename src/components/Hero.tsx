@@ -198,7 +198,7 @@ export function Hero() {
               <span className="relative z-[2]">View Projects</span>
             </a>
             <a
-              href="/resume.pdf"
+              href="/Resume.pdf"
               download
               className="glitch-btn scan-btn group relative inline-flex items-center gap-2 rounded border border-secondary bg-secondary/5 px-5 py-3 text-secondary transition-all hover:bg-secondary/15 hover:glow-cyan"
               data-text="Download Resume"
