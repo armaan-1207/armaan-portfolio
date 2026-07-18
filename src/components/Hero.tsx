@@ -5,7 +5,8 @@ import { Github, Linkedin, Mail, FileDown, Terminal } from "lucide-react";
 const Spline = lazy(() => import("@splinetool/react-spline"));
 
 const LINE_1 = "Hi, I'm Armaan Malhotra";
-const LINE_2 = "Cybersecurity Student | Breaking Systems to Understand Them";
+const LINE_2 = "Cybersecurity Enthusiast | Breaking Systems to Understand Them";
+const SCROLL_HINT = "[ scroll to decrypt ↓ ]";
 
 function useTyped(lines: string[], speed = 45, linePause = 500) {
   const [out, setOut] = useState<string[]>(lines.map(() => ""));
@@ -45,9 +46,26 @@ function useTyped(lines: string[], speed = 45, linePause = 500) {
   return { out, done };
 }
 
-// Highlight one keyword per line (neon green + glow cyan).
+function useTypedString(text: string, speed = 55, startDelay = 400) {
+  const [out, setOut] = useState("");
+  useEffect(() => {
+    let cancelled = false;
+    let i = 0;
+    const start = setTimeout(function tick() {
+      if (cancelled) return;
+      i++;
+      setOut(text.slice(0, i));
+      if (i < text.length) setTimeout(tick, speed);
+    }, startDelay);
+    return () => {
+      cancelled = true;
+      clearTimeout(start);
+    };
+  }, [text, speed, startDelay]);
+  return out;
+}
+
 function renderLine1(text: string) {
-  // highlight "Armaan" in neon green
   const target = "Armaan";
   const idx = text.indexOf(target);
   if (idx === -1) return <>{text}</>;
@@ -55,8 +73,9 @@ function renderLine1(text: string) {
     <>
       {text.slice(0, idx)}
       <span
-        className="text-primary"
+        className="text-primary hero-name-glitch"
         style={{ textShadow: "0 0 12px rgba(0,255,157,0.7)" }}
+        data-text={target}
       >
         {text.slice(idx, idx + target.length)}
       </span>
@@ -90,6 +109,7 @@ export function Hero() {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
   const { out, done } = useTyped([LINE_1, LINE_2]);
+  const scrollHint = useTypedString(SCROLL_HINT, 45, 1400);
 
   const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
@@ -98,6 +118,18 @@ export function Hero() {
   });
   const rotateY = useTransform(scrollYProgress, [0, 1], [0, 15]);
   const scale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
+
+  // Parallax on mouse
+  const [mouse, setMouse] = useState({ x: 0, y: 0 });
+  useEffect(() => {
+    const onMove = (e: MouseEvent) => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 2;
+      const y = (e.clientY / window.innerHeight - 0.5) * 2;
+      setMouse({ x, y });
+    };
+    window.addEventListener("mousemove", onMove);
+    return () => window.removeEventListener("mousemove", onMove);
+  }, []);
 
   const line1Active = out[0].length < LINE_1.length;
   const line2Active = !line1Active && !done;
@@ -120,28 +152,35 @@ export function Hero() {
         )}
       </motion.div>
 
-      {/* Overlays for readability */}
-      <div className="pointer-events-none absolute inset-0 z-[1] grid-bg opacity-25" />
+      {/* Circuit grid pattern with parallax */}
+      <div
+        className="pointer-events-none absolute inset-0 z-[1] circuit-bg opacity-[0.18]"
+        style={{
+          transform: `translate3d(${mouse.x * -8}px, ${mouse.y * -8}px, 0)`,
+          transition: "transform 200ms ease-out",
+        }}
+      />
+      <div className="pointer-events-none absolute inset-0 z-[1] grid-bg opacity-20" />
       <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-[#0a0e14]/60 via-[#0a0e14]/30 to-[#0a0e14]/80" />
 
       {/* Content */}
       <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col justify-center px-6 pt-32 pb-24">
         <div className="max-w-3xl">
           {/* Badge */}
-          <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-primary/50 bg-primary/5 px-3.5 py-1 font-mono text-[11px] uppercase tracking-[0.18em] text-primary backdrop-blur-sm">
+          <div className="mb-12 inline-flex items-center gap-2 rounded-full border border-primary/50 bg-primary/5 px-3.5 py-1 font-mono text-[11px] uppercase tracking-[0.18em] text-primary backdrop-blur-sm">
             <span aria-hidden>🛡</span>
-            Cybersecurity Student
+            Cybersecurity Enthusiast
           </div>
 
           {/* Typed headline */}
-          <h1 className="mb-4 font-mono text-4xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl">
+          <h1 className="mb-6 font-mono text-4xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl">
             {renderLine1(out[0])}
             {line1Active && (
               <span className="animate-blink text-primary">_</span>
             )}
           </h1>
 
-          <p className="mb-10 min-h-[2em] font-mono text-lg text-muted-foreground sm:text-xl md:text-2xl">
+          <p className="mb-14 min-h-[2em] font-mono text-lg text-muted-foreground sm:text-xl md:text-2xl">
             {renderLine2(out[1])}
             {(line2Active || done) && (
               <span className="animate-blink text-primary">_</span>
@@ -152,31 +191,31 @@ export function Hero() {
           <div className="flex flex-wrap gap-4 font-mono text-sm">
             <a
               href="#projects"
-              className="glitch-btn group relative inline-flex items-center gap-2 rounded border border-primary bg-primary/10 px-5 py-3 text-primary transition-all hover:bg-primary/20 hover:glow-neon"
+              className="glitch-btn scan-btn group relative inline-flex items-center gap-2 rounded border border-primary bg-primary/10 px-5 py-3 text-primary transition-all hover:bg-primary/20 hover:glow-neon"
               data-text="View Projects"
             >
               <Terminal size={16} />
-              View Projects
+              <span className="relative z-[2]">View Projects</span>
             </a>
             <a
               href="/resume.pdf"
               download
-              className="glitch-btn group relative inline-flex items-center gap-2 rounded border border-secondary bg-secondary/5 px-5 py-3 text-secondary transition-all hover:bg-secondary/15 hover:glow-cyan"
+              className="glitch-btn scan-btn group relative inline-flex items-center gap-2 rounded border border-secondary bg-secondary/5 px-5 py-3 text-secondary transition-all hover:bg-secondary/15 hover:glow-cyan"
               data-text="Download Resume"
             >
               <FileDown size={16} />
-              Download Resume
+              <span className="relative z-[2]">Download Resume</span>
             </a>
           </div>
 
           {/* Socials */}
-          <div className="mt-8 flex items-center gap-5">
+          <div className="mt-10 flex items-center gap-5">
             <a
               href="https://github.com/armaan-1207"
               target="_blank"
               rel="noreferrer"
               aria-label="GitHub"
-              className="text-muted-foreground transition-colors hover:text-primary"
+              className="social-icon text-muted-foreground"
             >
               <Github size={20} />
             </a>
@@ -185,14 +224,14 @@ export function Hero() {
               target="_blank"
               rel="noreferrer"
               aria-label="LinkedIn"
-              className="text-muted-foreground transition-colors hover:text-secondary"
+              className="social-icon text-muted-foreground"
             >
               <Linkedin size={20} />
             </a>
             <a
               href="mailto:amalhotra1be25@thapar.edu"
               aria-label="Email"
-              className="text-muted-foreground transition-colors hover:text-primary"
+              className="social-icon text-muted-foreground"
             >
               <Mail size={20} />
             </a>
@@ -201,7 +240,8 @@ export function Hero() {
       </div>
 
       <div className="pointer-events-none absolute bottom-6 left-1/2 z-10 -translate-x-1/2 font-mono text-[10px] text-muted-foreground">
-        [ scroll to decrypt ↓ ]
+        {scrollHint}
+        <span className="animate-blink text-primary">▋</span>
       </div>
     </section>
   );
