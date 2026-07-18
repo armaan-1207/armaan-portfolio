@@ -13,6 +13,7 @@ import { Experience } from "@/components/Experience";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 import { ScrollProgress } from "@/components/ScrollProgress";
+import { StatusBar } from "@/components/StatusBar";
 
 export const Route = createFileRoute("/")({
   head: () => ({
