@@ -73,6 +73,7 @@ function Home() {
         transition={{ duration: 0.7, ease: "easeOut", delay: loading ? 0 : 0.15 }}
         className="min-h-screen bg-[#0a0e14] text-foreground"
       >
+        <ScrollProgress />
         <Nav />
         <main>
           <Hero />
