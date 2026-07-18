@@ -193,6 +193,31 @@
   animation-delay: 1s;
 }
 
+/* Loading screen — scanner sweep bar (Layer 2 highlight) */
+@keyframes ls-sweep-move {
+  0%   { transform: translateY(-10vh); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { transform: translateY(110vh); opacity: 0; }
+}
+.ls-sweep {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 90px;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,255,157,0) 0%,
+    rgba(0,255,157,0.06) 40%,
+    rgba(0,255,157,0.16) 50%,
+    rgba(0,255,157,0.06) 60%,
+    rgba(0,255,157,0) 100%
+  );
+  mix-blend-mode: screen;
+  animation: ls-sweep-move 4s linear infinite;
+}
+
 @keyframes glitch-shift {
   0%, 100% { transform: translate(0, 0); opacity: 0.85; }
   20% { transform: translate(-2px, 1px); }
