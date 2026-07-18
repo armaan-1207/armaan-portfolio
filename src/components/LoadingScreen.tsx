@@ -117,6 +117,10 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
       <MatrixRain opacity={0.12} />
       {/* Drifting scanline overlay */}
       <div className="pointer-events-none absolute inset-0 ls-scanlines" />
+      {/* Scanner sweep bar */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="ls-sweep" />
+      </div>
 
       {/* Shield stack */}
       <div className="relative z-10 flex h-56 w-56 items-center justify-center sm:h-64 sm:w-64">
