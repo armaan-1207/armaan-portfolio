@@ -13,6 +13,7 @@ import { Experience } from "@/components/Experience";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 import { ScrollProgress } from "@/components/ScrollProgress";
+import { StatusBar } from "@/components/StatusBar";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -71,21 +72,42 @@ function Home() {
         initial={{ opacity: hasPlayed && !loading ? 1 : 0 }}
         animate={{ opacity: loading ? 0 : 1 }}
         transition={{ duration: 0.7, ease: "easeOut", delay: loading ? 0 : 0.15 }}
-        className="min-h-screen bg-[#0a0e14] text-foreground"
+        className="relative min-h-screen bg-[#0a0e14] text-foreground"
       >
-        <ScrollProgress />
-        <Nav />
-        <main>
-          <Hero />
-          <About />
-          <Skills />
-          <Projects />
-          <CTFWriteups />
-          <Certifications />
-          <Experience />
-          <Contact />
-        </main>
-        <Footer />
+        {/* Global terminal-environment background layers */}
+        <div
+          aria-hidden
+          className="pointer-events-none fixed inset-0 z-0 grid-bg opacity-[0.35]"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none fixed inset-0 z-0 scanlines opacity-60"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none fixed inset-0 z-0"
+          style={{
+            background:
+              "radial-gradient(ellipse at 50% 0%, rgba(0,255,157,0.06), transparent 60%), radial-gradient(ellipse at 80% 100%, rgba(0,217,255,0.05), transparent 60%)",
+          }}
+        />
+
+        <div className="relative z-10">
+          <ScrollProgress />
+          <Nav />
+          <StatusBar />
+          <main>
+            <Hero />
+            <About />
+            <Skills />
+            <Projects />
+            <CTFWriteups />
+            <Certifications />
+            <Experience />
+            <Contact />
+          </main>
+          <Footer />
+        </div>
       </motion.div>
     </>
   );
