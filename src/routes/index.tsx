@@ -12,6 +12,7 @@ import { Certifications } from "@/components/Certifications";
 import { Experience } from "@/components/Experience";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
+import { ScrollProgress } from "@/components/ScrollProgress";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -72,6 +73,7 @@ function Home() {
         transition={{ duration: 0.7, ease: "easeOut", delay: loading ? 0 : 0.15 }}
         className="min-h-screen bg-[#0a0e14] text-foreground"
       >
+        <ScrollProgress />
         <Nav />
         <main>
           <Hero />
