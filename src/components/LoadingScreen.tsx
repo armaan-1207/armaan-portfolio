@@ -14,21 +14,38 @@ const PER_LINE = TOTAL_MS / LINES.length;
 const CHAR_MS = 18;
 
 function FlickerPercent({ value }: { value: number }) {
-  const [display, setDisplay] = useState(value);
+  const [display, setDisplay] = useState(String(value).padStart(3, "0"));
+  const lastValue = useRef<number>(value);
+
   useEffect(() => {
-    // Occasionally show a wrong digit briefly, then correct.
-    if (Math.random() < 0.35) {
-      const jitter = Math.max(
-        0,
-        Math.min(100, value + Math.floor((Math.random() - 0.5) * 14)),
-      );
-      setDisplay(jitter);
-      const t = setTimeout(() => setDisplay(value), 55);
-      return () => clearTimeout(t);
-    }
-    setDisplay(value);
+    if (value === lastValue.current) return;
+    lastValue.current = value;
+
+    const finalStr = String(value).padStart(3, "0");
+    const prefix = finalStr.slice(0, -1);
+    const trueLast = parseInt(finalStr.slice(-1), 10);
+
+    // Pick 2 adjacent digits to shuffle between for ~100ms.
+    const adjA = (trueLast + 9) % 10;
+    const adjB = (trueLast + 1) % 10;
+    const pool = [adjA, adjB];
+
+    let i = 0;
+    const shuffle = setInterval(() => {
+      setDisplay(prefix + pool[i % pool.length]);
+      i++;
+    }, 30);
+    const settle = setTimeout(() => {
+      clearInterval(shuffle);
+      setDisplay(finalStr);
+    }, 100);
+    return () => {
+      clearInterval(shuffle);
+      clearTimeout(settle);
+    };
   }, [value]);
-  return <span>{display.toString().padStart(3, "0")}%</span>;
+
+  return <span>{display}%</span>;
 }
 
 export function LoadingScreen({ onDone }: { onDone: () => void }) {
