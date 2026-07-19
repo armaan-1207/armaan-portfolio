@@ -42,7 +42,7 @@ export function Contact() {
     // To receive real emails to amalhotra1be25@thapar.edu:
     // 1. Go to https://web3forms.com/#get-started and enter your email
     // 2. Paste the free Access Key you receive below:
-    const ACCESS_KEY = "YOUR_WEB3FORMS_ACCESS_KEY";
+    const ACCESS_KEY = "4ca9287c-4573-4e64-8502-49a386d6024c";
 
     if (ACCESS_KEY === "YOUR_WEB3FORMS_ACCESS_KEY") {
       // Fallback simulation until access key is added
