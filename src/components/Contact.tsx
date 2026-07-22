@@ -251,8 +251,8 @@ export function Contact() {
                   key={label}
                   href={href}
                   id={`social-${label}`}
-                  target={href.startsWith("http") ? "_blank" : undefined}
-                  rel={href.startsWith("http") ? "noreferrer" : undefined}
+                  target={href && href.startsWith("http") ? "_blank" : undefined}
+                  rel={href && href.startsWith("http") ? "noreferrer" : undefined}
                   className={`flex items-center gap-4 rounded-lg border bg-card/60 p-4 transition-all hover:bg-card ${
                     isPrimary
                       ? "border-border hover:border-primary/50 hover:shadow-[0_0_18px_rgba(0,255,157,0.08)]"

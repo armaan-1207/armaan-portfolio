@@ -37,8 +37,11 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
     // Add logs one by one fast
     const interval = setInterval(() => {
       if (currentLog < BOOT_LOGS.length) {
-        setLogs((prev) => [...prev, BOOT_LOGS[currentLog]]);
+        const nextLog = BOOT_LOGS[currentLog];
         currentLog++;
+        if (nextLog !== undefined) {
+          setLogs((prev) => [...prev, nextLog]);
+        }
         
         // Auto scroll to bottom
         if (bottomRef.current) {
@@ -72,6 +75,7 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
 
       <div className="relative z-10 w-full h-full overflow-y-auto text-sm md:text-base text-foreground/90 font-mono scrollbar-none">
         {logs.map((log, index) => {
+          if (!log) return null;
           // Color coding parts of the log for realism
           if (log.startsWith("[  OK  ]")) {
             return (
