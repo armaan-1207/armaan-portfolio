@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Github, Linkedin, Mail, FileDown, Terminal, Shield, Maximize2, Minus, X } from "lucide-react";
-import { PulseNode } from "./PulseNode";
+import React, { Suspense } from "react";
+const PulseNode = React.lazy(() => import("./PulseNode").then(m => ({ default: m.PulseNode })));
 import gsap from "gsap";
 
 const LINE_1 = "Hi, I'm Armaan Malhotra";
@@ -109,6 +110,11 @@ export function Hero() {
   const scrollHint = useTypedString(SCROLL_HINT, 45, 1400);
 
   const heroContentRef = useRef<HTMLDivElement>(null);
+  const [mounted, setMounted] = useState(false);
+  
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (heroContentRef.current) {
@@ -259,7 +265,11 @@ export function Hero() {
             </div>
 
             {/* 3D Pulse Canvas */}
-            <PulseNode />
+            {mounted && (
+              <Suspense fallback={<div className="h-[380px] w-full sm:h-[450px] lg:h-[500px]" />}>
+                <PulseNode />
+              </Suspense>
+            )}
           </div>
         </div>
       </div>
