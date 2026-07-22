@@ -108,16 +108,17 @@ export function CTFWriteups() {
       </div>
 
       {/* ── Card grid ── */}
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 w-full">
+      <div style={{ perspective: "1000px" }} className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 w-full">
         <AnimatePresence mode="popLayout">
           {visible.map((w, i) => (
             <motion.div
               key={w.name}
               layout
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 55, rotateX: 12, scale: 0.94 }}
+              whileInView={{ opacity: 1, y: 0, rotateX: 0, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1], delay: i * 0.06 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.75, delay: i * 0.12, ease: [0.16, 1, 0.3, 1] }}
               className="h-full"
             >
               <TiltCard className="h-full">

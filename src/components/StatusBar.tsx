@@ -15,13 +15,15 @@ export function StatusBar() {
   return (
     <div
       aria-hidden
-      className="pointer-events-none fixed bottom-4 right-4 z-40 hidden items-center gap-2 rounded border border-primary/25 bg-[#0a0e14]/70 px-2.5 py-1 font-mono text-[10px] tracking-wider text-muted-foreground backdrop-blur-md sm:flex"
+      className="pointer-events-none fixed bottom-4 left-1/2 -translate-x-1/2 z-40 hidden items-center gap-2.5 rounded-full border border-primary/30 bg-[#060a12]/85 px-4 py-1.5 font-mono text-[11px] tracking-wider text-muted-foreground shadow-[0_0_25px_rgba(0,0,0,0.8)] backdrop-blur-md sm:flex"
     >
-      <span className="inline-block h-1.5 w-1.5 rounded-full bg-primary shadow-[0_0_8px_#00ff9d] animate-pulse" />
-      <span className="text-primary/80">SYSTEM:</span>
-      <span className="text-foreground/80">ONLINE</span>
+      <span className="inline-block h-2 w-2 rounded-full bg-primary shadow-[0_0_10px_#00ff9d] animate-pulse" />
+      <span className="text-primary/90 font-bold">SYSTEM:</span>
+      <span className="text-foreground font-semibold">ONLINE</span>
       <span className="text-border">|</span>
-      <span className="tabular-nums text-foreground/80">
+      <span className="text-secondary font-bold">ENC_CORE</span>
+      <span className="text-border">|</span>
+      <span className="tabular-nums text-foreground/90 font-semibold">
         {hh}:{mm}:{ss}
       </span>
     </div>

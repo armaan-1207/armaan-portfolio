@@ -65,14 +65,15 @@ export function Contact() {
 
   return (
     <Section id="contact" index="07" title="contact.init()">
-      {/* Single High-Contrast Encrypted Transmission Card Console */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-10% 0px" }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className="relative overflow-hidden rounded-xl border border-secondary/30 bg-[#070c14]/95 p-6 sm:p-8 shadow-[0_0_40px_rgba(0,0,0,0.6)] backdrop-blur-md w-full"
-      >
+      <div style={{ perspective: "1000px" }} className="w-full">
+        {/* Single High-Contrast Encrypted Transmission Card Console with 3D Entrance */}
+        <motion.div
+          initial={{ opacity: 0, y: 55, rotateX: 12, scale: 0.94 }}
+          whileInView={{ opacity: 1, y: 0, rotateX: 0, scale: 1 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="relative overflow-hidden rounded-xl border border-secondary/30 bg-[#070c14]/95 p-6 sm:p-8 shadow-[0_20px_45px_rgba(0,0,0,0.8)] backdrop-blur-md w-full transition-all duration-300 hover:border-secondary/60 hover:shadow-[0_20px_55px_rgba(0,217,255,0.15)]"
+        >
         {/* Central Lock Icon & INITIATE ENCRYPTED TRANSMISSION Title */}
         <div className="text-center max-w-2xl mx-auto mb-10">
           <div className="mx-auto mb-4 grid h-14 w-14 place-items-center rounded-2xl border border-primary/40 bg-primary/10 text-primary shadow-[0_0_20px_rgba(0,255,157,0.3)]">
@@ -221,6 +222,7 @@ export function Contact() {
           </div>
         </div>
       </motion.div>
+      </div>
     </Section>
   );
 }

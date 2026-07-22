@@ -95,9 +95,10 @@ export function Experience() {
               {/* ── Right col: content card ── */}
               <motion.div
                 className={`flex-1 min-w-0 ${isLast ? "pb-0" : "pb-12"}`}
-                initial={{ opacity: 0, x: -22 }}
-                animate={inView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.25 + i * 0.22 }}
+                initial={{ opacity: 0, x: -30, y: 45, rotateX: 12, scale: 0.95 }}
+                whileInView={{ opacity: 1, x: 0, y: 0, rotateX: 0, scale: 1 }}
+                viewport={{ once: true, amount: 0.15 }}
+                transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1], delay: 0.15 + i * 0.18 }}
               >
                 <div
                   className={`rounded-xl border bg-[#070b12]/90 p-6 transition-all hover:bg-card/95 backdrop-blur-md ${

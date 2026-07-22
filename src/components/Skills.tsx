@@ -94,16 +94,16 @@ export function Skills() {
 
   return (
     <Section id="skills" index="02" title="skills.txt">
-      <motion.div
-        ref={termRef}
-        initial={{ opacity: 0, y: 35 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.15 }}
-        transition={{ duration: 0.65, ease: "easeOut" }}
-        className="flex flex-col gap-6 w-full"
-      >
+      <div style={{ perspective: "1000px" }} className="flex flex-col gap-6 w-full">
         {/* Bash Command Line Prompt */}
-        <div className="rounded-xl border border-secondary/30 bg-[#060a12]/95 p-4 font-mono text-sm shadow-[0_0_30px_rgba(0,0,0,0.7)] backdrop-blur-md">
+        <motion.div
+          ref={termRef}
+          initial={{ opacity: 0, y: 35, rotateX: 10 }}
+          whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="rounded-xl border border-secondary/30 bg-[#060a12]/95 p-4 font-mono text-sm shadow-[0_10px_30px_rgba(0,0,0,0.7)] backdrop-blur-md"
+        >
           <div className="flex items-center gap-2 border-b border-border/50 pb-2.5 mb-3 text-xs text-muted-foreground">
             <span className="h-2.5 w-2.5 rounded-full bg-red-500/80" />
             <span className="h-2.5 w-2.5 rounded-full bg-yellow-500/80" />
@@ -117,39 +117,34 @@ export function Skills() {
               {phase === "cmd" && <span className="animate-blink text-secondary">█</span>}
             </span>
           </div>
-        </div>
+        </motion.div>
 
-        {/* Interactive Matrix Cards Grid with Staggered Scroll Entrance */}
+        {/* Interactive Matrix Cards Grid with 3D Staggered Entrance */}
         {phase === "content" && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-            className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full"
-          >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
             {SKILL_CATEGORIES.map((cat, idx) => {
               const IconComp = cat.icon;
 
-              let borderStyle = "border-primary/30 hover:border-primary/70 hover:shadow-[0_0_30px_rgba(0,255,157,0.18)]";
+              let borderStyle = "border-primary/30 hover:border-primary/70 hover:shadow-[0_15px_40px_rgba(0,255,157,0.2)]";
               let iconStyle = "border-primary/40 bg-primary/10 text-primary shadow-[0_0_15px_rgba(0,255,157,0.25)]";
               let titleColor = "text-primary";
               let chipHoverStyle = "hover:border-primary/70 hover:bg-primary/15 hover:text-primary hover:shadow-[0_0_15px_rgba(0,255,157,0.3)]";
               let iconColor = "text-primary";
 
               if (cat.accent === "secondary") {
-                borderStyle = "border-secondary/30 hover:border-secondary/70 hover:shadow-[0_0_30px_rgba(0,217,255,0.18)]";
+                borderStyle = "border-secondary/30 hover:border-secondary/70 hover:shadow-[0_15px_40px_rgba(0,217,255,0.2)]";
                 iconStyle = "border-secondary/40 bg-secondary/10 text-secondary shadow-[0_0_15px_rgba(0,217,255,0.25)]";
                 titleColor = "text-secondary";
                 chipHoverStyle = "hover:border-secondary/70 hover:bg-secondary/15 hover:text-secondary hover:shadow-[0_0_15px_rgba(0,217,255,0.3)]";
                 iconColor = "text-secondary";
               } else if (cat.accent === "purple") {
-                borderStyle = "border-purple-500/30 hover:border-purple-500/70 hover:shadow-[0_0_30px_rgba(168,85,247,0.2)]";
+                borderStyle = "border-purple-500/30 hover:border-purple-500/70 hover:shadow-[0_15px_40px_rgba(168,85,247,0.22)]";
                 iconStyle = "border-purple-500/40 bg-purple-500/10 text-purple-400 shadow-[0_0_15px_rgba(168,85,247,0.28)]";
                 titleColor = "text-purple-400";
                 chipHoverStyle = "hover:border-purple-500/70 hover:bg-purple-500/15 hover:text-purple-300 hover:shadow-[0_0_15px_rgba(168,85,247,0.3)]";
                 iconColor = "text-purple-400";
               } else if (cat.accent === "slate") {
-                borderStyle = "border-slate-500/30 hover:border-slate-400/70 hover:shadow-[0_0_30px_rgba(226,232,240,0.12)]";
+                borderStyle = "border-slate-500/30 hover:border-slate-400/70 hover:shadow-[0_15px_40px_rgba(226,232,240,0.14)]";
                 iconStyle = "border-slate-400/40 bg-slate-500/10 text-slate-200 shadow-[0_0_15px_rgba(226,232,240,0.18)]";
                 titleColor = "text-slate-200";
                 chipHoverStyle = "hover:border-slate-300 hover:bg-slate-400/15 hover:text-white hover:shadow-[0_0_15px_rgba(226,232,240,0.25)]";
@@ -159,11 +154,12 @@ export function Skills() {
               return (
                 <motion.div
                   key={cat.title}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, y: 50, rotateX: 14, scale: 0.94 }}
+                  whileInView={{ opacity: 1, y: 0, rotateX: 0, scale: 1 }}
+                  whileHover={{ scale: 1.015, rotateX: 1.5, rotateY: idx % 2 === 0 ? 1.5 : -1.5 }}
                   viewport={{ once: true, amount: 0.1 }}
-                  transition={{ duration: 0.55, delay: idx * 0.12, ease: "easeOut" }}
-                  className={`group relative overflow-hidden rounded-xl border bg-[#060a12]/95 p-6 transition-all backdrop-blur-md ${borderStyle}`}
+                  transition={{ duration: 0.7, delay: idx * 0.14, ease: [0.16, 1, 0.3, 1] }}
+                  className={`group relative overflow-hidden rounded-xl border bg-[#060a12]/95 p-6 transition-all duration-300 backdrop-blur-md ${borderStyle}`}
                 >
                   {/* Category Header */}
                   <div className="flex items-center gap-3 border-b border-border/50 pb-3 mb-5">
@@ -185,7 +181,7 @@ export function Skills() {
                     {cat.skills.map((skillName) => (
                       <div
                         key={skillName}
-                        className={`group/chip relative flex items-center gap-2 rounded-lg border border-border/60 bg-surface/60 px-3 py-1.5 font-mono text-xs text-foreground transition-all ${chipHoverStyle}`}
+                        className={`group/chip relative flex items-center gap-2 rounded-lg border border-border/60 bg-surface/60 px-3 py-1.5 font-mono text-xs text-foreground transition-all duration-200 ${chipHoverStyle}`}
                       >
                         <Zap size={12} className={`${iconColor} opacity-70 group-hover/chip:opacity-100 transition-opacity`} />
                         <span className="font-semibold">{skillName}</span>
@@ -195,9 +191,9 @@ export function Skills() {
                 </motion.div>
               );
             })}
-          </motion.div>
+          </div>
         )}
-      </motion.div>
+      </div>
     </Section>
   );
 }

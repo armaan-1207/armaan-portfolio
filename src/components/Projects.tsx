@@ -27,14 +27,14 @@ const PROJECTS = [
 export function Projects() {
   return (
     <Section id="projects" index="03" title="projects.build()">
-      <div className="grid gap-8 md:grid-cols-2 w-full">
+      <div style={{ perspective: "1000px" }} className="grid gap-8 md:grid-cols-2 w-full">
         {PROJECTS.map((p, i) => (
           <motion.div
             key={p.name}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-10% 0px" }}
-            transition={{ duration: 0.6, delay: i * 0.15, ease: "easeOut" }}
+            initial={{ opacity: 0, y: 55, rotateX: 12, scale: 0.94 }}
+            whileInView={{ opacity: 1, y: 0, rotateX: 0, scale: 1 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.75, delay: i * 0.15, ease: [0.16, 1, 0.3, 1] }}
             className="h-full"
           >
             <TiltCard className="h-full">
