@@ -126,19 +126,20 @@
 
 @utility grid-bg {
   background-image:
-    linear-gradient(color-mix(in oklab, #00ff9d 6%, transparent) 1px, transparent 1px),
-    linear-gradient(90deg, color-mix(in oklab, #00ff9d 6%, transparent) 1px, transparent 1px);
+    linear-gradient(color-mix(in oklab, #00d9ff 4%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklab, #00d9ff 4%, transparent) 1px, transparent 1px);
   background-size: 44px 44px;
 }
 
 @utility scanlines {
   background-image: repeating-linear-gradient(
     0deg,
-    rgba(0, 255, 157, 0.03) 0px,
-    rgba(0, 255, 157, 0.03) 1px,
+    rgba(0, 217, 255, 0.02) 0px,
+    rgba(0, 217, 255, 0.02) 1px,
     transparent 1px,
     transparent 3px
   );
+  background-size: 100% 3px;
 }
 
 @keyframes blink {

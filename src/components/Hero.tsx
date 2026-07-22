@@ -146,8 +146,8 @@ export function Hero() {
     >
       {/* Subtle Glowing Background Mesh for Hacker Atmosphere */}
       <div className="pointer-events-none absolute inset-0 z-0 grid-bg opacity-20" />
-      <div className="pointer-events-none absolute -top-24 right-0 z-0 h-96 w-96 rounded-full bg-primary/10 blur-[120px]" />
-      <div className="pointer-events-none absolute bottom-0 left-0 z-0 h-96 w-96 rounded-full bg-secondary/10 blur-[120px]" />
+      <div className="pointer-events-none absolute -top-24 right-0 z-0 h-96 w-96 rounded-full bg-secondary/5 blur-[140px]" />
+      <div className="pointer-events-none absolute bottom-0 left-0 z-0 h-96 w-96 rounded-full bg-secondary/5 blur-[140px]" />
 
       {/* Main 2-Column Hero Container */}
       <div

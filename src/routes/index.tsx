@@ -92,7 +92,7 @@ function Home() {
           className="pointer-events-none fixed inset-0 z-0"
           style={{
             background:
-              "radial-gradient(ellipse at 50% 0%, rgba(0,255,157,0.06), transparent 60%), radial-gradient(ellipse at 80% 100%, rgba(0,217,255,0.05), transparent 60%)",
+              "radial-gradient(ellipse at 50% 0%, rgba(0,217,255,0.035), transparent 60%), radial-gradient(ellipse at 80% 100%, rgba(168,85,247,0.03), transparent 60%)",
           }}
         />
 
