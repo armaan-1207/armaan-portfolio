@@ -1,8 +1,7 @@
-import { Suspense, lazy, useEffect, useRef, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import { Github, Linkedin, Mail, FileDown, Terminal } from "lucide-react";
-
-const Spline = lazy(() => import("@splinetool/react-spline"));
+import { CyberGrid } from "./CyberGrid";
+import gsap from "gsap";
 
 const LINE_1 = "Hi, I'm Armaan Malhotra";
 const LINE_2 = "Cybersecurity Enthusiast | Breaking Systems to Understand Them";
@@ -74,7 +73,7 @@ function renderLine1(text: string) {
       {text.slice(0, idx)}
       <span
         className="text-primary hero-name-glitch"
-        style={{ textShadow: "0 0 12px rgba(0,255,157,0.7)" }}
+        style={{ textShadow: "0 0 14px rgba(0,255,157,0.85)" }}
         data-text={target}
       >
         {text.slice(idx, idx + target.length)}
@@ -106,29 +105,20 @@ function renderLine2(text: string) {
 }
 
 export function Hero() {
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
   const { out, done } = useTyped([LINE_1, LINE_2]);
   const scrollHint = useTypedString(SCROLL_HINT, 45, 1400);
 
-  const sectionRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end start"],
-  });
-  const rotateY = useTransform(scrollYProgress, [0, 1], [0, 15]);
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
+  const heroContentRef = useRef<HTMLDivElement>(null);
 
-  // Parallax on mouse
-  const [mouse, setMouse] = useState({ x: 0, y: 0 });
+  // GSAP entrance animation for Hero text container
   useEffect(() => {
-    const onMove = (e: MouseEvent) => {
-      const x = (e.clientX / window.innerWidth - 0.5) * 2;
-      const y = (e.clientY / window.innerHeight - 0.5) * 2;
-      setMouse({ x, y });
-    };
-    window.addEventListener("mousemove", onMove);
-    return () => window.removeEventListener("mousemove", onMove);
+    if (heroContentRef.current) {
+      gsap.fromTo(
+        heroContentRef.current,
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 1, ease: "power3.out", delay: 0.2 }
+      );
+    }
   }, []);
 
   const line1Active = out[0].length < LINE_1.length;
@@ -136,38 +126,25 @@ export function Hero() {
 
   return (
     <section
-      ref={sectionRef}
       id="top"
-      className="relative min-h-screen w-full overflow-hidden"
+      className="relative min-h-screen w-full overflow-hidden bg-[#0a0e14]"
     >
-      {/* Spline background — scroll-linked wrapper */}
-      <motion.div
-        className="absolute inset-0 z-0"
-        style={{ rotateY, scale, transformPerspective: 1000, transformOrigin: "center center" }}
-      >
-        {mounted && (
-          <Suspense fallback={null}>
-            <Spline scene="https://prod.spline.design/JWMigd3B99qNewCQ/scene.splinecode" />
-          </Suspense>
-        )}
-      </motion.div>
+      {/* 3D CyberGrid background — ultra-lightweight Three.js canvas */}
+      <CyberGrid />
 
-      {/* Circuit grid pattern with parallax */}
+      {/* Grid overlay & subtle gradient */}
+      <div className="pointer-events-none absolute inset-0 z-[1] circuit-bg opacity-[0.15]" />
+      <div className="pointer-events-none absolute inset-0 z-[1] grid-bg opacity-15" />
+      <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-[#0a0e14]/40 via-transparent to-[#0a0e14]" />
+
+      {/* Hero Content */}
       <div
-        className="pointer-events-none absolute inset-0 z-[1] circuit-bg opacity-[0.18]"
-        style={{
-          transform: `translate3d(${mouse.x * -8}px, ${mouse.y * -8}px, 0)`,
-          transition: "transform 200ms ease-out",
-        }}
-      />
-      <div className="pointer-events-none absolute inset-0 z-[1] grid-bg opacity-20" />
-      <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-[#0a0e14]/60 via-[#0a0e14]/30 to-[#0a0e14]/80" />
-
-      {/* Content */}
-      <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col justify-center px-6 pt-32 pb-24">
+        ref={heroContentRef}
+        className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col justify-center px-6 pt-32 pb-24"
+      >
         <div className="max-w-3xl">
           {/* Badge */}
-          <div className="mb-12 inline-flex items-center gap-2 rounded-full border border-primary/50 bg-primary/5 px-3.5 py-1 font-mono text-[11px] uppercase tracking-[0.18em] text-primary backdrop-blur-sm">
+          <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-primary/50 bg-primary/5 px-3.5 py-1 font-mono text-[11px] uppercase tracking-[0.18em] text-primary backdrop-blur-sm shadow-[0_0_12px_rgba(0,255,157,0.15)]">
             <span aria-hidden>🛡</span>
             Cybersecurity Enthusiast
           </div>
@@ -180,7 +157,7 @@ export function Hero() {
             )}
           </h1>
 
-          <p className="mb-14 min-h-[2em] font-mono text-lg text-muted-foreground sm:text-xl md:text-2xl">
+          <p className="mb-12 min-h-[2em] font-mono text-lg text-muted-foreground sm:text-xl md:text-2xl">
             {renderLine2(out[1])}
             {(line2Active || done) && (
               <span className="animate-blink text-primary">_</span>
@@ -215,7 +192,7 @@ export function Hero() {
               target="_blank"
               rel="noreferrer"
               aria-label="GitHub"
-              className="social-icon text-muted-foreground"
+              className="social-icon text-muted-foreground hover:text-primary transition-colors"
             >
               <Github size={20} />
             </a>
@@ -224,14 +201,14 @@ export function Hero() {
               target="_blank"
               rel="noreferrer"
               aria-label="LinkedIn"
-              className="social-icon text-muted-foreground"
+              className="social-icon text-muted-foreground hover:text-secondary transition-colors"
             >
               <Linkedin size={20} />
             </a>
             <a
               href="mailto:amalhotra1be25@thapar.edu"
               aria-label="Email"
-              className="social-icon text-muted-foreground"
+              className="social-icon text-muted-foreground hover:text-primary transition-colors"
             >
               <Mail size={20} />
             </a>
@@ -239,6 +216,7 @@ export function Hero() {
         </div>
       </div>
 
+      {/* Scroll Hint */}
       <div className="pointer-events-none absolute bottom-6 left-1/2 z-10 -translate-x-1/2 font-mono text-[10px] text-muted-foreground">
         {scrollHint}
         <span className="animate-blink text-primary">▋</span>

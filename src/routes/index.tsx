@@ -14,20 +14,21 @@ import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { StatusBar } from "@/components/StatusBar";
+import { SmoothScroll } from "@/components/SmoothScroll";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "alex_nakamura // offensive security researcher" },
+      { title: "Armaan Malhotra // Cybersecurity & Red Teaming" },
       {
         name: "description",
         content:
-          "Portfolio of Alex Nakamura — offensive security researcher, CTF player, and red-team engineer.",
+          "Portfolio of Armaan Malhotra — cybersecurity enthusiast, CTF player, and engineering undergraduate at TIET Patiala.",
       },
-      { property: "og:title", content: "alex_nakamura // offensive security researcher" },
+      { property: "og:title", content: "Armaan Malhotra // Cybersecurity Portfolio" },
       {
         property: "og:description",
-        content: "Exploits, CTF writeups, red-team tooling, and security research.",
+        content: "CTF writeups, security projects, and hands-on learning in web application security and network forensics.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -36,8 +37,6 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
-// Module-level flag: play once per visit (survives re-renders/remounts within
-// the SPA session, resets on full page reload — which is "per visit").
 let hasPlayed = false;
 
 function Home() {
@@ -48,7 +47,7 @@ function Home() {
   }, [loading]);
 
   return (
-    <>
+    <SmoothScroll>
       <AnimatePresence mode="wait">
         {loading && (
           <motion.div
@@ -109,6 +108,6 @@ function Home() {
           <Footer />
         </div>
       </motion.div>
-    </>
+    </SmoothScroll>
   );
 }
