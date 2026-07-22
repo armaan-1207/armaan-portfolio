@@ -14,10 +14,10 @@ export function About() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-10% 0px" }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="relative overflow-hidden rounded-xl border border-primary/30 bg-[#070b12]/90 shadow-[0_0_30px_rgba(0,0,0,0.6)] backdrop-blur-md"
+            className="relative overflow-hidden rounded-xl border border-secondary/30 bg-[#070b12]/90 shadow-[0_0_30px_rgba(0,0,0,0.6)] backdrop-blur-md"
           >
             {/* Subtle Glowing Scanline Mesh */}
-            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(0,255,157,0.03)_1px,transparent_1px)] bg-[size:100%_4px]" />
+            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(0,217,255,0.03)_1px,transparent_1px)] bg-[size:100%_4px]" />
 
             {/* Top bar */}
             <div className="flex items-center justify-between border-b border-border/60 bg-surface/80 px-4 py-3">
@@ -27,7 +27,7 @@ export function About() {
                 <span className="h-2.5 w-2.5 rounded-full bg-green-500/80" />
                 <span className="ml-3 font-mono text-xs font-semibold text-foreground/80">~/about.md</span>
               </div>
-              <span className="font-mono text-[11px] text-primary/80 flex items-center gap-1">
+              <span className="font-mono text-[11px] text-secondary/90 flex items-center gap-1">
                 <Shield size={12} className="animate-pulse" /> ENCRYPTED_PROFILE
               </span>
             </div>
@@ -35,27 +35,27 @@ export function About() {
             <div className="relative z-10 p-6 font-mono">
               {/* prompt */}
               <p className="mb-4 text-xs sm:text-sm">
-                <span className="text-primary font-bold">$ </span>
+                <span className="text-secondary font-bold">$ </span>
                 <span className="text-foreground/90 font-semibold">cat about.md --decrypt</span>
               </p>
 
               {/* bio */}
-              <div className="border-l-2 border-primary/40 pl-5 space-y-3">
+              <div className="border-l-2 border-secondary/50 pl-5 space-y-3">
                 <p className="font-sans text-sm sm:text-base leading-[1.85] text-muted-foreground">
                   Engineering undergraduate building a foundation in cybersecurity through{" "}
                   <span className="text-primary font-semibold">self-directed, hands-on training</span> and CTFs.
                   Learning{" "}
-                  <span className="text-primary font-semibold">web application security</span>,{" "}
+                  <span className="text-secondary font-semibold">web application security</span>,{" "}
                   <span className="text-primary font-semibold">network forensics</span>, and{" "}
-                  <span className="text-primary font-semibold">Linux-based security tooling</span> via
+                  <span className="text-secondary font-semibold">Linux-based security tooling</span> via
                   structured platforms like{" "}
                   <span className="text-secondary font-semibold">TryHackMe</span>,{" "}
                   <span className="text-secondary font-semibold">PortSwigger Web Security Academy</span>, and{" "}
                   <span className="text-secondary font-semibold">OverTheWire</span>, with growing hands-on exposure
                   to{" "}
-                  <span className="text-secondary font-semibold">Burp Suite</span>,{" "}
-                  <span className="text-secondary font-semibold">Wireshark</span>, and{" "}
-                  <span className="text-secondary font-semibold">Metasploit</span>.
+                  <span className="text-primary font-semibold">Burp Suite</span>,{" "}
+                  <span className="text-primary font-semibold">Wireshark</span>, and{" "}
+                  <span className="text-primary font-semibold">Metasploit</span>.
                 </p>
               </div>
             </div>
@@ -117,7 +117,7 @@ export function About() {
             ].map((tag) => (
               <span
                 key={tag}
-                className="inline-flex items-center gap-1.5 rounded-lg border border-primary/30 bg-primary/10 px-3.5 py-1.5 font-mono text-xs text-primary transition-all hover:bg-primary/20 hover:border-primary/60 hover:shadow-[0_0_12px_rgba(0,255,157,0.2)]"
+                className="inline-flex items-center gap-1.5 rounded-lg border border-secondary/30 bg-secondary/10 px-3.5 py-1.5 font-mono text-xs text-secondary transition-all hover:bg-secondary/20 hover:border-secondary/60 hover:shadow-[0_0_12px_rgba(0,217,255,0.2)]"
               >
                 <Zap size={11} /> {tag}
               </span>
@@ -144,7 +144,7 @@ export function About() {
               <defs>
                 <linearGradient id="hexStrokeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                   <stop offset="0%" stopColor="#00ff9d" stopOpacity="0.9" />
-                  <stop offset="50%" stopColor="#00d9ff" stopOpacity="0.75" />
+                  <stop offset="50%" stopColor="#00d9ff" stopOpacity="0.85" />
                   <stop offset="100%" stopColor="#00ff9d" stopOpacity="0.9" />
                 </linearGradient>
               </defs>
@@ -155,13 +155,13 @@ export function About() {
                 stroke="url(#hexStrokeGrad)"
                 strokeWidth="2"
                 strokeDasharray="6 3"
-                opacity="0.8"
+                opacity="0.85"
               />
               {/* Inner solid ring */}
               <polygon
                 points="114,14 212,68 212,196 114,250 16,196 16,68"
-                fill="rgba(0,255,157,0.04)"
-                stroke="rgba(0,255,157,0.25)"
+                fill="rgba(0,217,255,0.04)"
+                stroke="rgba(0,217,255,0.3)"
                 strokeWidth="1"
               />
             </svg>
@@ -177,7 +177,7 @@ export function About() {
               }}
             >
               <div className="flex flex-col items-center gap-2 select-none">
-                {/* Initials with glitch */}
+                {/* Initials with dual green+cyan glow */}
                 <span
                   className="font-mono text-7xl font-extrabold text-gradient-neon hero-name-glitch"
                   style={{ letterSpacing: "-0.04em" }}
@@ -192,7 +192,7 @@ export function About() {
                   {[0, 0.4, 0.8].map((d) => (
                     <span
                       key={d}
-                      className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse shadow-[0_0_6px_#00ff9d]"
+                      className="h-1.5 w-1.5 rounded-full bg-secondary animate-pulse shadow-[0_0_6px_#00d9ff]"
                       style={{ animationDelay: `${d}s` }}
                     />
                   ))}
@@ -200,14 +200,14 @@ export function About() {
               </div>
             </div>
 
-            {/* Floating corner badges */}
-            <span className="absolute -bottom-3 -right-6 rounded-md border border-primary/45 bg-[#080d17]/95 px-3 py-1 font-mono text-[10px] font-bold text-primary backdrop-blur-sm shadow-[0_0_14px_rgba(0,255,157,0.3)]">
+            {/* Floating corner badges - High Contrast Neon Pills */}
+            <span className="absolute -bottom-3 -right-6 rounded-lg border border-primary/70 bg-[#070e18] px-3 py-1 font-mono text-xs font-bold text-primary backdrop-blur-md shadow-[0_0_16px_rgba(0,255,157,0.35)]">
               CTF_PLAYER
             </span>
-            <span className="absolute -top-3 -left-6 rounded-md border border-secondary/45 bg-[#080d17]/95 px-3 py-1 font-mono text-[10px] font-bold text-secondary backdrop-blur-sm shadow-[0_0_14px_rgba(0,217,255,0.3)]">
-              SEC_RESEARCHER
+            <span className="absolute -top-3 -left-8 rounded-lg border border-secondary/70 bg-[#070e18] px-3 py-1 font-mono text-xs font-bold text-secondary backdrop-blur-md shadow-[0_0_16px_rgba(0,217,255,0.35)]">
+              CYBERSEC_ENTHUSIAST
             </span>
-            <span className="absolute top-1/2 -right-12 -translate-y-1/2 rounded border border-primary/30 bg-[#080d17]/95 px-2.5 py-1 font-mono text-[10px] text-primary/80 backdrop-blur-sm">
+            <span className="absolute top-1/2 -right-10 -translate-y-1/2 rounded-lg border border-purple-400/70 bg-[#070e18] px-2.5 py-1 font-mono text-xs font-bold text-purple-300 backdrop-blur-md shadow-[0_0_16px_rgba(168,85,247,0.35)]">
               root@kali
             </span>
           </div>
