@@ -66,7 +66,7 @@ const WRITEUPS: Writeup[] = [
     diff: "hard",
     summary:
       "Carved a hidden ZIP from a raw packet capture, recovered a password from the file's own header and decrypted a Beaufort cipher to uncover the buried flag.",
-    pdf: "/Writeups/the pensieve.pdf",
+    pdf: "/Writeups/The pensieve.pdf",
   },
 ];
 
