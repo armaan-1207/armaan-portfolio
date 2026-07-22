@@ -98,8 +98,8 @@ export function Skills() {
         {/* Bash Command Line Prompt */}
         <motion.div
           ref={termRef}
-          initial={{ opacity: 0, y: 35, rotateX: 10 }}
-          whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+          initial={{ opacity: 0, y: 30, scale: 0.98 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
           viewport={{ once: true, amount: 0.15 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="rounded-xl border border-secondary/30 bg-[#060a12]/95 p-4 font-mono text-sm shadow-[0_10px_30px_rgba(0,0,0,0.7)] backdrop-blur-md"
@@ -154,11 +154,11 @@ export function Skills() {
               return (
                 <motion.div
                   key={cat.title}
-                  initial={{ opacity: 0, y: 50, rotateX: 14, scale: 0.94 }}
-                  whileInView={{ opacity: 1, y: 0, rotateX: 0, scale: 1 }}
-                  whileHover={{ scale: 1.015, rotateX: 1.5, rotateY: idx % 2 === 0 ? 1.5 : -1.5 }}
+                  initial={{ opacity: 0, y: 40, scale: 0.97 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  whileHover={{ y: -4, scale: 1.015 }}
                   viewport={{ once: true, amount: 0.1 }}
-                  transition={{ duration: 0.7, delay: idx * 0.14, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ duration: 0.7, delay: idx * 0.12, ease: [0.16, 1, 0.3, 1] }}
                   className={`group relative overflow-hidden rounded-xl border bg-[#060a12]/95 p-6 transition-all duration-300 backdrop-blur-md ${borderStyle}`}
                 >
                   {/* Category Header */}

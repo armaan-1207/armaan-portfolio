@@ -5,12 +5,12 @@ import { GraduationCap, MapPin, Calendar, Zap, Shield, Fingerprint } from "lucid
 export function About() {
   return (
     <Section id="about" index="01" title="whoami --verbose">
-      <div style={{ perspective: "1000px" }} className="grid grid-cols-1 lg:grid-cols-12 gap-6 w-full">
-        {/* Terminal Bio Window with 3D Entrance & Hover Tilt */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 w-full">
+        {/* Terminal Bio Window */}
         <motion.div
-          initial={{ opacity: 0, y: 55, rotateX: 12, rotateY: 3 }}
-          whileInView={{ opacity: 1, y: 0, rotateX: 0, rotateY: 0 }}
-          whileHover={{ scale: 1.01, rotateX: 1.5, rotateY: -1.5 }}
+          initial={{ opacity: 0, y: 40, scale: 0.97 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          whileHover={{ y: -4, scale: 1.01 }}
           viewport={{ once: true, amount: 0.15 }}
           transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
           className="lg:col-span-7 rounded-xl border border-secondary/30 bg-[#060a12]/95 p-6 shadow-[0_15px_35px_rgba(0,0,0,0.75)] backdrop-blur-md relative overflow-hidden transition-all duration-300 hover:border-secondary/70 hover:shadow-[0_15px_45px_rgba(0,217,255,0.18)]"
@@ -69,13 +69,13 @@ export function About() {
           </div>
         </motion.div>
 
-        {/* Education & Credentials Card with 3D Entrance & Hover Tilt */}
+        {/* Education & Credentials Card */}
         <motion.div
-          initial={{ opacity: 0, y: 55, rotateX: 12, rotateY: -3 }}
-          whileInView={{ opacity: 1, y: 0, rotateX: 0, rotateY: 0 }}
-          whileHover={{ scale: 1.01, rotateX: 1.5, rotateY: 1.5 }}
+          initial={{ opacity: 0, y: 40, scale: 0.97 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          whileHover={{ y: -4, scale: 1.01 }}
           viewport={{ once: true, amount: 0.15 }}
-          transition={{ duration: 0.75, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.75, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
           className="lg:col-span-5 flex flex-col justify-between rounded-xl border border-primary/30 bg-[#060a12]/95 p-6 shadow-[0_15px_35px_rgba(0,0,0,0.75)] backdrop-blur-md relative overflow-hidden group hover:border-primary/70 hover:shadow-[0_15px_45px_rgba(0,255,157,0.18)] transition-all duration-300"
         >
           {/* Subtle emerald background lighting */}
@@ -92,7 +92,7 @@ export function About() {
               </div>
             </div>
 
-            {/* University Details (100% Accurate Batch & Degree) */}
+            {/* University Details */}
             <div className="space-y-4">
               <div>
                 <h3 className="font-mono text-base sm:text-lg font-bold text-foreground leading-snug">
@@ -129,7 +129,7 @@ export function About() {
               </span>
             </div>
 
-            {/* High-Contrast Kali Console Pill (Deep Purple & Neon Cyan) */}
+            {/* High-Contrast Kali Console Pill */}
             <div className="rounded-lg border border-purple-500/50 bg-[#0c0517] p-3.5 shadow-[0_0_20px_rgba(168,85,247,0.25)] font-mono text-xs flex items-center justify-between">
               <div className="flex items-center gap-2 text-purple-300 font-bold">
                 <Shield size={14} className="text-purple-400 animate-pulse" />
