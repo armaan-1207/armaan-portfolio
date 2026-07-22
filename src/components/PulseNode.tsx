@@ -18,19 +18,19 @@ function PulseSphere() {
     }
 
     // Expand radial rings
-    if (ring1Ref.current) {
+    if (ring1Ref.current && ring1Ref.current.material) {
       const s1 = (t * 0.8) % 2.5;
       ring1Ref.current.scale.set(s1, s1, s1);
       (ring1Ref.current.material as THREE.MeshBasicMaterial).opacity = Math.max(0, 1 - s1 / 2.5);
     }
 
-    if (ring2Ref.current) {
+    if (ring2Ref.current && ring2Ref.current.material) {
       const s2 = (t * 0.8 + 0.8) % 2.5;
       ring2Ref.current.scale.set(s2, s2, s2);
       (ring2Ref.current.material as THREE.MeshBasicMaterial).opacity = Math.max(0, 1 - s2 / 2.5);
     }
 
-    if (ring3Ref.current) {
+    if (ring3Ref.current && ring3Ref.current.material) {
       const s3 = (t * 0.8 + 1.6) % 2.5;
       ring3Ref.current.scale.set(s3, s3, s3);
       (ring3Ref.current.material as THREE.MeshBasicMaterial).opacity = Math.max(0, 1 - s3 / 2.5);

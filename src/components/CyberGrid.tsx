@@ -41,7 +41,7 @@ function CyberWave() {
   }, [count, width, depth]);
 
   useFrame((state) => {
-    if (!pointsRef.current) return;
+    if (!pointsRef.current || !pointsRef.current.geometry || !pointsRef.current.geometry.attributes.position) return;
     const time = state.clock.getElapsedTime();
     const positions = pointsRef.current.geometry.attributes.position.array as Float32Array;
 
