@@ -4,7 +4,7 @@ import { n as motion, r as AnimatePresence, t as useInView } from "../_libs/fram
 import { C as Download, E as Calendar, S as FastForward, T as CircleCheck, _ as GraduationCap, a as Sparkles, b as FileText, c as Send, d as Maximize2, f as MapPin, g as Layers, h as Linkedin, i as Terminal, l as Minus, m as Lock, n as X, o as Shield, p as Mail, r as Users, s as ShieldCheck, t as Zap, u as Menu, v as Github, w as Cpu, x as FileDown, y as Fingerprint } from "../_libs/lucide-react.mjs";
 import { n as gsapWithCSS, t as ScrollTrigger } from "../_libs/gsap.mjs";
 import { t as Lenis } from "../_libs/lenis.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-DPuhv2Ac.js
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-CCKRaWCo.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var BOOT_LOGS = [
@@ -59,12 +59,12 @@ function LoadingScreen({ onDone }) {
 				}
 				currentLog++;
 				if (bottomRef.current) bottomRef.current.scrollIntoView({ behavior: "smooth" });
-				let delay = 110;
-				if (nextLog?.includes("Security Auditing") || nextLog?.includes("LUKS Encrypted")) delay = 320;
-				else if (nextLog?.includes("BurpSuite") || nextLog?.includes("Hyprland")) delay = 280;
-				else if (nextLog?.includes("WELCOME TO KALI")) delay = 220;
+				let delay = 180;
+				if (nextLog?.includes("Security Auditing") || nextLog?.includes("LUKS Encrypted")) delay = 550;
+				else if (nextLog?.includes("BurpSuite") || nextLog?.includes("Hyprland")) delay = 480;
+				else if (nextLog?.includes("WELCOME TO KALI")) delay = 400;
 				timeoutId = setTimeout(step, delay);
-			} else timeoutId = setTimeout(handleFinish, 400);
+			} else timeoutId = setTimeout(handleFinish, 900);
 		};
 		step();
 		const onKeyDown = (e) => {
