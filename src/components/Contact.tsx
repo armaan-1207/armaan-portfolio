@@ -41,10 +41,10 @@ export function Contact() {
 
     // To receive real emails to amalhotra1be25@thapar.edu:
     // 1. Go to https://web3forms.com/#get-started and enter your email
-    // 2. Paste the free Access Key you receive below:
-    const ACCESS_KEY = "4ca9287c-4573-4e64-8502-49a386d6024c" as string;
+    // 2. Set VITE_WEB3FORMS_ACCESS_KEY in your .env file
+    const ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY as string | undefined;
 
-    if (ACCESS_KEY === "YOUR_WEB3FORMS_ACCESS_KEY") {
+    if (!ACCESS_KEY || ACCESS_KEY === "YOUR_WEB3FORMS_ACCESS_KEY") {
       // Fallback simulation until access key is added
       setTimeout(() => {
         setSending(false);
