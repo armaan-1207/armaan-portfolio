@@ -49,12 +49,12 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
         
         // Wait a tiny bit then slide up container
         setTimeout(() => {
-          gsap.to(containerRef.current, {
-            yPercent: -100,
-            duration: 0.8,
-            ease: "power4.inOut",
-            onComplete: onDone
-          });
+          if (containerRef.current) {
+            containerRef.current.style.transition = "transform 0.8s cubic-bezier(0.85, 0, 0.15, 1)";
+            containerRef.current.style.transform = "translateY(-100%)";
+          }
+          // Guarantee onDone fires
+          setTimeout(onDone, 800);
         }, 500);
       }
     }, 70);

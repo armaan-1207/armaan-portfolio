@@ -38,14 +38,21 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
-let hasPlayed = false;
-
 function Home() {
-  const [loading, setLoading] = useState(() => !hasPlayed);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!loading) hasPlayed = true;
-  }, [loading]);
+    // Client-side check to see if we've already played the boot sequence
+    const hasPlayed = sessionStorage.getItem("hasPlayedBootSequence");
+    if (hasPlayed === "true") {
+      setLoading(false);
+    }
+  }, []);
+
+  const handleDone = () => {
+    sessionStorage.setItem("hasPlayedBootSequence", "true");
+    setLoading(false);
+  };
 
   return (
     <SmoothScroll>
@@ -60,18 +67,13 @@ function Home() {
             transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
             className="fixed inset-0 z-[100]"
           >
-            <LoadingScreen
-              onDone={() => {
-                hasPlayed = true;
-                setLoading(false);
-              }}
-            />
+            <LoadingScreen onDone={handleDone} />
           </motion.div>
         )}
       </AnimatePresence>
 
       <motion.div
-        initial={{ opacity: hasPlayed && !loading ? 1 : 0 }}
+        initial={{ opacity: !loading ? 1 : 0 }}
         animate={{ opacity: loading ? 0 : 1 }}
         transition={{ duration: 0.7, ease: "easeOut", delay: loading ? 0 : 0.15 }}
         className="relative min-h-screen bg-[#0a0e14] text-foreground cursor-none"
