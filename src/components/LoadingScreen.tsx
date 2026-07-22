@@ -2,26 +2,34 @@ import { useEffect, useState, useRef } from "react";
 import gsap from "gsap";
 
 const BOOT_LOGS = [
-  "[ OK ] Started Initial Ramdisk System...",
-  "[ OK ] Reached target Local File Systems.",
-  "[ OK ] Starting Security Auditing Service...",
-  "[ OK ] Loaded Kernel Module: crypto_aes_ni",
-  "[ OK ] Initializing eBPF Packet Filter Engine...",
-  "[ OK ] Starting Kali NetworkManager...",
-  "[ OK ] Mounted /dev/mapper/kali-root (LUKS Encrypted)",
-  "[ OK ] Loading BurpSuite / Metasploit Core Modules...",
-  "[ OK ] Initializing Hyprland Wayland Compositor...",
-  "[ OK ] Starting Security Subsystem (Armaan Malhotra DevSecOps)...",
+  "Welcome to Kali GNU/Linux 2026.1",
+  "",
+  "[  OK  ] Started Initial Ramdisk System.",
+  "[  OK  ] Reached target Local File Systems.",
+  "[  OK  ] Starting Security Auditing Service...",
+  "[  OK  ] Loaded Kernel Module: crypto_aes_ni",
+  "[  OK  ] Initializing eBPF Packet Filter Engine...",
+  "[  OK  ] Starting NetworkManager...",
+  "[  OK  ] Reached target Network.",
+  "[  OK  ] Mounted /dev/mapper/kali-root (LUKS Encrypted)",
+  "[  OK  ] Loading BurpSuite Core Modules...",
+  "[  OK  ] Initializing Hyprland Wayland Compositor...",
+  "[  OK  ] Starting Security Subsystem (Armaan Malhotra DevSecOps)...",
+  "[  OK  ] Started OpenBSD Secure Shell server.",
+  "[  OK  ] Reached target Multi-User System.",
+  "[  OK  ] Reached target Graphical Interface.",
+  "",
   "============================================================",
   "               WELCOME TO KALI LINUX (2026.1)              ",
   "============================================================",
-  "SYSTEM STATUS: ONLINE | SECURITY CLEARANCE: LEVEL 5 (ROOT)"
+  "SYSTEM STATUS: ONLINE | SECURITY CLEARANCE: LEVEL 5 (ROOT)",
+  "Starting display manager..."
 ];
 
 export function LoadingScreen({ onDone }: { onDone: () => void }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [logs, setLogs] = useState<string[]>([]);
-  const [percent, setPercent] = useState(0);
+  const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let currentLog = 0;
@@ -30,8 +38,12 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
     const interval = setInterval(() => {
       if (currentLog < BOOT_LOGS.length) {
         setLogs((prev) => [...prev, BOOT_LOGS[currentLog]]);
-        setPercent(Math.min(100, Math.floor(((currentLog + 1) / BOOT_LOGS.length) * 100)));
         currentLog++;
+        
+        // Auto scroll to bottom
+        if (bottomRef.current) {
+          bottomRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
       } else {
         clearInterval(interval);
         
@@ -39,13 +51,13 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
         setTimeout(() => {
           gsap.to(containerRef.current, {
             yPercent: -100,
-            duration: 0.7,
+            duration: 0.8,
             ease: "power4.inOut",
             onComplete: onDone
           });
-        }, 400);
+        }, 500);
       }
-    }, 90);
+    }, 70);
 
     return () => clearInterval(interval);
   }, [onDone]);
@@ -53,54 +65,40 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 z-[100000] flex flex-col items-center justify-center bg-[#05080c] font-mono p-6 select-none overflow-hidden"
+      className="fixed inset-0 z-[100000] flex flex-col bg-[#05080c] font-mono p-4 sm:p-8 select-none overflow-hidden"
     >
       {/* Subtle scanline background */}
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(0,255,157,0.03)_1px,transparent_1px)] bg-[size:100%_3px]" />
 
-      <div className="relative z-10 w-full max-w-2xl rounded-lg border border-primary/30 bg-[#0a0f18]/90 p-5 shadow-[0_0_50px_rgba(0,255,157,0.15)] backdrop-blur-md">
-        {/* Terminal Header */}
-        <div className="mb-4 flex items-center justify-between border-b border-primary/20 pb-3">
-          <div className="flex items-center gap-2">
-            <span className="h-3 w-3 rounded-full bg-red-500/80 inline-block" />
-            <span className="h-3 w-3 rounded-full bg-yellow-500/80 inline-block" />
-            <span className="h-3 w-3 rounded-full bg-green-500/80 inline-block" />
-            <span className="ml-2 text-xs font-semibold text-primary/80">root@kali-linux: ~# ./boot.sh</span>
-          </div>
-          <span className="text-xs text-muted-foreground">{percent}%</span>
-        </div>
-
-        {/* Log Window */}
-        <div className="h-64 overflow-y-auto space-y-1 text-xs text-foreground/90 font-mono scrollbar-none">
-          {logs.map((log, index) => (
-            <div
-              key={index}
-              className={`${
-                log.startsWith("==")
-                  ? "text-secondary font-bold text-center py-0.5"
-                  : log.startsWith("SYSTEM")
-                  ? "text-primary font-bold text-center animate-pulse"
-                  : "text-emerald-400/90"
-              }`}
-            >
+      <div className="relative z-10 w-full h-full overflow-y-auto text-sm md:text-base text-foreground/90 font-mono scrollbar-none">
+        {logs.map((log, index) => {
+          // Color coding parts of the log for realism
+          if (log.startsWith("[  OK  ]")) {
+            return (
+              <div key={index} className="flex gap-2">
+                <span className="text-white">[  <span className="text-green-500 font-bold">OK</span>  ]</span>
+                <span className="text-gray-300">{log.replace("[  OK  ] ", "")}</span>
+              </div>
+            );
+          }
+          if (log.startsWith("==")) {
+            return <div key={index} className="text-green-500 font-bold text-center sm:text-left">{log}</div>;
+          }
+          if (log.includes("SYSTEM STATUS")) {
+            return <div key={index} className="text-green-400 font-bold text-center sm:text-left animate-pulse">{log}</div>;
+          }
+          return (
+            <div key={index} className="text-gray-300">
               {log}
             </div>
-          ))}
-          {logs.length < BOOT_LOGS.length && (
-            <div className="flex items-center gap-1 text-primary">
-              <span>&gt;</span>
-              <span className="inline-block h-3 w-1.5 bg-primary animate-pulse" />
-            </div>
-          )}
-        </div>
-
-        {/* Progress Bar */}
-        <div className="mt-4 h-1.5 w-full overflow-hidden rounded bg-surface border border-primary/20">
-          <div
-            className="h-full bg-primary shadow-[0_0_12px_#00ff9d] transition-all duration-100 ease-out"
-            style={{ width: `${percent}%` }}
-          />
-        </div>
+          );
+        })}
+        {logs.length < BOOT_LOGS.length && (
+          <div className="flex items-center gap-1 mt-1">
+            <span className="inline-block h-4 w-2.5 bg-gray-400 animate-pulse" />
+          </div>
+        )}
+        <div ref={bottomRef} />
       </div>
     </div>
   );

@@ -7,9 +7,6 @@ export function CustomCursor() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Disable on touch devices
-    if (window.matchMedia("(pointer: coarse)").matches) return;
-
     setIsVisible(true);
 
     const cursor = cursorRef.current;

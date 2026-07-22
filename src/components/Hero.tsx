@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Github, Linkedin, Mail, FileDown, Terminal, Shield } from "lucide-react";
+import { Github, Linkedin, Mail, FileDown, Terminal, Shield, Maximize2, Minus, X } from "lucide-react";
 import { PulseNode } from "./PulseNode";
 import gsap from "gsap";
 
@@ -126,8 +126,26 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="relative min-h-screen w-full overflow-hidden bg-[#070b10] pt-24 pb-16"
+      className="relative flex flex-col w-full overflow-hidden rounded-lg border border-border/80 bg-[#0a0f18]/80 shadow-[0_0_30px_rgba(0,0,0,0.6)] backdrop-blur-md"
     >
+      {/* Tiling Window Top Bar */}
+      <div className="flex items-center justify-between border-b border-border/60 bg-surface/80 px-4 py-2 relative z-20">
+        <div className="flex items-center gap-3">
+          <span className="font-mono text-xs font-bold text-primary">
+            [00]
+          </span>
+          <h2 className="font-mono text-sm tracking-tight text-muted-foreground">
+            <span className="text-foreground/90">dashboard</span>
+            <span className="text-primary/80">.exe</span>
+          </h2>
+        </div>
+        <div className="flex items-center gap-2 text-muted-foreground/50">
+          <Minus size={14} className="hover:text-primary transition-colors cursor-pointer" />
+          <Maximize2 size={12} className="hover:text-primary transition-colors cursor-pointer" />
+          <X size={14} className="hover:text-red-400 transition-colors cursor-pointer" />
+        </div>
+      </div>
+
       {/* Background Grid Accent */}
       <div className="pointer-events-none absolute inset-0 z-[1] grid-bg opacity-20" />
       <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-transparent via-[#070b10]/50 to-[#070b10]" />
@@ -135,7 +153,7 @@ export function Hero() {
       {/* Split Container */}
       <div
         ref={heroContentRef}
-        className="relative z-10 mx-auto flex min-h-[calc(100vh-6rem)] max-w-7xl flex-col justify-center px-6 lg:flex-row lg:items-center lg:gap-12"
+        className="relative z-10 mx-auto flex min-h-[calc(100vh-12rem)] w-full flex-col justify-center px-6 lg:px-12 py-12 lg:flex-row lg:items-center lg:gap-12"
       >
         {/* Left Side: Bio & Controls */}
         <div className="flex-1 max-w-2xl">

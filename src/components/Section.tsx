@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { motion } from "framer-motion";
+import { Maximize2, Minus, X } from "lucide-react";
 
 export function Section({
   id,
@@ -12,38 +13,41 @@ export function Section({
   title: string;
   children: ReactNode;
 }) {
-  // Split title on the FIRST dot so the "extension" (e.g. ".arsenal",
-  // ".build()") renders in cyan for a consistent green/cyan heading rhythm.
   const dot = title.indexOf(".");
   const head = dot >= 0 ? title.slice(0, dot) : title;
   const tail = dot >= 0 ? title.slice(dot) : "";
 
   return (
-    <section
+    <motion.section
       id={id}
-      className="relative mx-auto max-w-7xl scroll-mt-24 px-6 py-24 md:py-32"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-10% 0px" }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className="relative flex flex-col scroll-mt-24 rounded-lg border border-border/80 bg-[#0a0f18]/80 shadow-[0_0_30px_rgba(0,0,0,0.6)] backdrop-blur-md overflow-hidden"
     >
-      {/* Animated horizontal command-execution divider */}
-      <motion.div
-        aria-hidden
-        initial={{ scaleX: 0, opacity: 0 }}
-        whileInView={{ scaleX: 1, opacity: 1 }}
-        viewport={{ once: true, margin: "-15% 0px" }}
-        transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
-        className="absolute left-0 right-0 top-0 h-px origin-left bg-gradient-to-r from-primary/0 via-primary/70 to-secondary/60 shadow-[0_0_10px_#00ff9d]"
-      />
-
-      <div className="mb-12 flex items-baseline gap-4">
-        <span className="font-mono text-base text-primary md:text-lg">
-          {index}.
-        </span>
-        <h2 className="font-mono text-3xl font-bold tracking-tight md:text-5xl">
-          <span className="text-foreground">{head}</span>
-          <span className="text-gradient-neon">{tail}</span>
-        </h2>
-        <span className="hidden h-px flex-1 bg-gradient-to-r from-border to-transparent sm:block" />
+      {/* Tiling Window Top Bar */}
+      <div className="flex items-center justify-between border-b border-border/60 bg-surface/80 px-4 py-2">
+        <div className="flex items-center gap-3">
+          <span className="font-mono text-xs font-bold text-primary">
+            [{index}]
+          </span>
+          <h2 className="font-mono text-sm tracking-tight text-muted-foreground">
+            <span className="text-foreground/90">{head}</span>
+            <span className="text-primary/80">{tail}</span>
+          </h2>
+        </div>
+        <div className="flex items-center gap-2 text-muted-foreground/50">
+          <Minus size={14} className="hover:text-primary transition-colors cursor-pointer" />
+          <Maximize2 size={12} className="hover:text-primary transition-colors cursor-pointer" />
+          <X size={14} className="hover:text-red-400 transition-colors cursor-pointer" />
+        </div>
       </div>
-      {children}
-    </section>
+
+      {/* Content Area */}
+      <div className="p-6 md:p-8">
+        {children}
+      </div>
+    </motion.section>
   );
 }
