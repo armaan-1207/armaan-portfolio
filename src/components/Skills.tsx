@@ -92,38 +92,22 @@ export function Skills() {
 
   return (
     <Section id="skills" index="02" title="skills.txt">
-      {/* Master Window Frame Container (Reference Image 2 Styling) */}
-      <div
-        ref={termRef}
-        className="relative overflow-hidden rounded-xl border border-secondary/30 bg-[#060a12]/95 p-6 shadow-[0_0_40px_rgba(0,0,0,0.7)] backdrop-blur-md w-full"
-      >
-        {/* World Map Watermark Background (Reference Image 2) */}
-        <svg
-          className="absolute right-4 top-12 h-64 w-96 opacity-10 pointer-events-none text-secondary"
-          viewBox="0 0 1000 500"
-          fill="currentColor"
-        >
-          <path d="M150,150 Q200,100 250,150 T350,150 M400,200 Q450,120 550,200 M600,180 Q700,100 850,180 T950,250 M100,300 Q150,350 250,300 M500,350 Q600,400 700,320" stroke="currentColor" strokeWidth="4" fill="none" strokeDasharray="10 5" />
-        </svg>
-
-        {/* Master Window Header */}
-        <div className="flex items-center justify-between border-b border-border/50 pb-4 mb-6">
-          <div className="flex items-center gap-2">
-            <span className="h-3 w-3 rounded-full bg-red-500/80" />
-            <span className="h-3 w-3 rounded-full bg-yellow-500/80" />
-            <span className="h-3 w-3 rounded-full bg-green-500/80" />
-            <span className="ml-3 font-mono text-xs font-semibold text-foreground/80">[02] skills.txt</span>
-          </div>
-          <span className="font-mono text-xs text-secondary/80 font-bold">$ skills.txt ~ bash</span>
-        </div>
-
+      <div ref={termRef} className="flex flex-col gap-6 w-full">
         {/* Bash Command Line Prompt */}
-        <div className="mb-6 font-mono text-xs sm:text-sm">
-          <span className="text-secondary font-bold">$ </span>
-          <span className="text-foreground font-semibold tracking-wide">
-            {CMD.slice(0, cmdChars)}
-            {phase === "cmd" && <span className="animate-blink text-secondary">█</span>}
-          </span>
+        <div className="rounded-xl border border-secondary/30 bg-[#070c14]/90 p-4 font-mono text-sm shadow-[0_0_25px_rgba(0,217,255,0.1)] backdrop-blur-md">
+          <div className="flex items-center gap-2 border-b border-border/50 pb-2.5 mb-3 text-xs text-muted-foreground">
+            <span className="h-2.5 w-2.5 rounded-full bg-red-500/80" />
+            <span className="h-2.5 w-2.5 rounded-full bg-yellow-500/80" />
+            <span className="h-2.5 w-2.5 rounded-full bg-green-500/80" />
+            <span className="ml-2 font-semibold text-foreground/80">skills.txt — bash</span>
+          </div>
+          <div className="flex items-center gap-2 text-xs sm:text-sm">
+            <span className="text-secondary font-bold">$</span>
+            <span className="text-foreground font-semibold tracking-wide">
+              {CMD.slice(0, cmdChars)}
+              {phase === "cmd" && <span className="animate-blink text-secondary">█</span>}
+            </span>
+          </div>
         </div>
 
         {/* Interactive Matrix Cards Grid */}
@@ -132,7 +116,7 @@ export function Skills() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full relative z-10"
+            className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full"
           >
             {SKILL_CATEGORIES.map((cat, idx) => {
               const IconComp = cat.icon;
@@ -169,30 +153,8 @@ export function Skills() {
                   initial={{ opacity: 0, y: 25 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: idx * 0.12 }}
-                  className={`group relative overflow-hidden rounded-xl border bg-[#080d16]/90 p-6 transition-all backdrop-blur-md ${borderStyle}`}
+                  className={`group relative overflow-hidden rounded-xl border bg-[#070c14]/90 p-6 transition-all backdrop-blur-md ${borderStyle}`}
                 >
-                  {/* Embedded Graphic Watermarks (From Reference Image 2) */}
-                  {cat.title.includes("Security Tools") && (
-                    /* Radar Target Reticle SVG Graphic */
-                    <svg className="absolute right-3 top-3 h-20 w-20 text-primary opacity-20 pointer-events-none" viewBox="0 0 100 100" fill="none" stroke="currentColor">
-                      <circle cx="50" cy="50" r="45" strokeWidth="1" strokeDasharray="4 2" />
-                      <circle cx="50" cy="50" r="30" strokeWidth="1" />
-                      <circle cx="50" cy="50" r="15" strokeWidth="1" />
-                      <line x1="50" y1="0" x2="50" y2="100" strokeWidth="1" />
-                      <line x1="0" y1="50" x2="100" y2="50" strokeWidth="1" />
-                    </svg>
-                  )}
-
-                  {cat.title.includes("Concepts") && (
-                    /* 3D Wireframe Orbital Rings SVG Graphic */
-                    <svg className="absolute right-3 top-3 h-20 w-20 text-slate-300 opacity-20 pointer-events-none" viewBox="0 0 100 100" fill="none" stroke="currentColor">
-                      <ellipse cx="50" cy="50" rx="42" ry="18" transform="rotate(-30 50 50)" strokeWidth="1.2" />
-                      <ellipse cx="50" cy="50" rx="42" ry="18" transform="rotate(30 50 50)" strokeWidth="1.2" />
-                      <ellipse cx="50" cy="50" rx="42" ry="18" transform="rotate(90 50 50)" strokeWidth="1.2" />
-                      <circle cx="50" cy="50" r="6" fill="currentColor" opacity="0.4" />
-                    </svg>
-                  )}
-
                   {/* Category Header */}
                   <div className="flex items-center gap-3 border-b border-border/50 pb-3 mb-5">
                     <div className={`grid h-10 w-10 shrink-0 place-items-center rounded-lg border ${iconStyle}`}>
@@ -225,20 +187,6 @@ export function Skills() {
             })}
           </motion.div>
         )}
-
-        {/* Master Window Footer Bar (Reference Image 2) */}
-        <div className="mt-8 pt-4 flex flex-wrap items-center justify-between border-t border-border/40 font-mono text-xs text-muted-foreground">
-          <div className="flex items-center gap-2">
-            <span className="text-primary font-bold">whoami@kali:~$</span>
-            <span className="animate-blink text-primary">█</span>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <span className="text-primary opacity-80">/\/\/\</span>
-            <span className="h-2 w-2 rounded-full bg-primary animate-pulse" />
-            <span className="font-semibold text-foreground">SYSTEM: ONLINE</span>
-          </div>
-        </div>
       </div>
     </Section>
   );

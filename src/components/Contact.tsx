@@ -65,24 +65,15 @@ export function Contact() {
 
   return (
     <Section id="contact" index="07" title="contact.init()">
-      {/* Master Window Frame Container (Reference Image 3) */}
-      <div className="relative overflow-hidden rounded-xl border border-secondary/30 bg-[#060a12]/95 p-6 sm:p-8 shadow-[0_0_50px_rgba(0,0,0,0.8)] backdrop-blur-md w-full">
-        {/* Master Header */}
-        <div className="flex items-center justify-between border-b border-border/50 pb-4 mb-8">
-          <div className="flex items-center gap-2">
-            <span className="h-3 w-3 rounded-full bg-red-500/80" />
-            <span className="h-3 w-3 rounded-full bg-yellow-500/80" />
-            <span className="h-3 w-3 rounded-full bg-green-500/80" />
-            <span className="ml-3 font-mono text-xs font-semibold text-foreground/80">[07] contact.init()</span>
-          </div>
-          <div className="flex items-center gap-2 text-muted-foreground font-mono text-xs">
-            <span>_</span>
-            <span>❐</span>
-            <span>✕</span>
-          </div>
-        </div>
-
-        {/* Central Lock Icon & INITIATE ENCRYPTED TRANSMISSION Title (Reference Image 3) */}
+      {/* Single High-Contrast Encrypted Transmission Card Console */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-10% 0px" }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="relative overflow-hidden rounded-xl border border-secondary/30 bg-[#070c14]/95 p-6 sm:p-8 shadow-[0_0_40px_rgba(0,0,0,0.6)] backdrop-blur-md w-full"
+      >
+        {/* Central Lock Icon & INITIATE ENCRYPTED TRANSMISSION Title */}
         <div className="text-center max-w-2xl mx-auto mb-10">
           <div className="mx-auto mb-4 grid h-14 w-14 place-items-center rounded-2xl border border-primary/40 bg-primary/10 text-primary shadow-[0_0_20px_rgba(0,255,157,0.3)]">
             <Lock size={26} className="animate-pulse" />
@@ -229,20 +220,7 @@ export function Contact() {
             })}
           </div>
         </div>
-
-        {/* Bottom Lock Node & Footer Status (Reference Image 3) */}
-        <div className="mt-12 pt-6 border-t border-border/40 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-muted-foreground">
-          <div className="text-primary font-bold">root@armaan:~$ exit</div>
-          <div className="text-center text-[11px]">
-            all systems nominal • © 2026 <span className="text-primary font-semibold">Armaan Malhotra</span>
-            <br className="sm:hidden" /> built with React, Vite &amp; Framer Motion
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="h-2 w-2 rounded-full bg-primary animate-pulse shadow-[0_0_8px_#00ff9d]" />
-            <span className="font-bold text-foreground">SYSTEM: ONLINE</span>
-          </div>
-        </div>
-      </div>
+      </motion.div>
     </Section>
   );
 }
