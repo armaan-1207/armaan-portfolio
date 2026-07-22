@@ -1,9 +1,10 @@
 import { i as __require, o as __toESM, t as __commonJSMin } from "../../_runtime.mjs";
-import { a as require_react, i as require_jsx_runtime, r as require_with_selector } from "../@react-three/fiber+[...].mjs";
+import { a as require_jsx_runtime, o as require_react, r as require_with_selector } from "../@react-three/fiber+[...].mjs";
 import { r as parseHref } from "../tanstack__history.mjs";
 import { PassThrough, Readable } from "node:stream";
 import { ReadableStream as ReadableStream$1 } from "node:stream/web";
 //#region node_modules/@tanstack/react-router/dist/esm/utils.js
+var import_with_selector = /* @__PURE__ */ __toESM(require_with_selector(), 1);
 var import_react = /* @__PURE__ */ __toESM(require_react(), 1);
 /**
 * React.use if available (React 19+), undefined otherwise.
@@ -3621,11 +3622,11 @@ var BaseRootRoute = class extends BaseRoute {
 };
 //#endregion
 //#region node_modules/@tanstack/router-core/dist/esm/ssr/constants.js
+var import_jsx_runtime = require_jsx_runtime();
 var GLOBAL_TSR = "$_TSR";
 var TSR_SCRIPT_BARRIER_ID = "$tsr-stream-barrier";
 //#endregion
 //#region node_modules/@tanstack/react-router/dist/esm/CatchBoundary.js
-var import_jsx_runtime = require_jsx_runtime();
 function CatchBoundary(props) {
 	const errorComponent = props.errorComponent ?? ErrorComponent;
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CatchBoundaryImpl, {
@@ -3991,7 +3992,6 @@ function purgeDeps(sub) {
 }
 //#endregion
 //#region node_modules/@tanstack/react-store/dist/esm/useStore.js
-var import_with_selector = /* @__PURE__ */ __toESM(require_with_selector(), 1);
 function defaultCompare(a, b) {
 	return a === b;
 }

@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
 
 export function StatusBar() {
-  const [time, setTime] = useState(() => new Date());
+  const [time, setTime] = useState<Date | null>(null);
 
   useEffect(() => {
+    setTime(new Date());
     const id = setInterval(() => setTime(new Date()), 1000);
     return () => clearInterval(id);
   }, []);
 
-  const hh = time.getHours().toString().padStart(2, "0");
-  const mm = time.getMinutes().toString().padStart(2, "0");
-  const ss = time.getSeconds().toString().padStart(2, "0");
+  const hh = time ? time.getHours().toString().padStart(2, "0") : "--";
+  const mm = time ? time.getMinutes().toString().padStart(2, "0") : "--";
+  const ss = time ? time.getSeconds().toString().padStart(2, "0") : "--";
 
   return (
     <div

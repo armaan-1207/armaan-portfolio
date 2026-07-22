@@ -1,5 +1,5 @@
 import { o as __toESM } from "../_runtime.mjs";
-import { a as require_react } from "./@react-three/fiber+[...].mjs";
+import { o as require_react } from "./@react-three/fiber+[...].mjs";
 //#region node_modules/lucide-react/dist/esm/shared/src/utils.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 /**
@@ -100,6 +100,23 @@ var Calendar = createLucideIcon("Calendar", [
 	}]
 ]);
 //#endregion
+//#region node_modules/lucide-react/dist/esm/icons/circle-check.js
+/**
+* @license lucide-react v0.462.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var CircleCheck = createLucideIcon("CircleCheck", [["circle", {
+	cx: "12",
+	cy: "12",
+	r: "10",
+	key: "1mglay"
+}], ["path", {
+	d: "m9 12 2 2 4-4",
+	key: "dzmm74"
+}]]);
+//#endregion
 //#region node_modules/lucide-react/dist/esm/icons/cpu.js
 /**
 * @license lucide-react v0.462.0 - ISC
@@ -183,6 +200,21 @@ var Download = createLucideIcon("Download", [
 	}]
 ]);
 //#endregion
+//#region node_modules/lucide-react/dist/esm/icons/fast-forward.js
+/**
+* @license lucide-react v0.462.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var FastForward = createLucideIcon("FastForward", [["polygon", {
+	points: "13 19 22 12 13 5 13 19",
+	key: "587y9g"
+}], ["polygon", {
+	points: "2 19 11 12 2 5 2 19",
+	key: "3pweh0"
+}]]);
+//#endregion
 //#region node_modules/lucide-react/dist/esm/icons/file-down.js
 /**
 * @license lucide-react v0.462.0 - ISC
@@ -239,6 +271,52 @@ var FileText = createLucideIcon("FileText", [
 	}]
 ]);
 //#endregion
+//#region node_modules/lucide-react/dist/esm/icons/fingerprint.js
+/**
+* @license lucide-react v0.462.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Fingerprint = createLucideIcon("Fingerprint", [
+	["path", {
+		d: "M12 10a2 2 0 0 0-2 2c0 1.02-.1 2.51-.26 4",
+		key: "1nerag"
+	}],
+	["path", {
+		d: "M14 13.12c0 2.38 0 6.38-1 8.88",
+		key: "o46ks0"
+	}],
+	["path", {
+		d: "M17.29 21.02c.12-.6.43-2.3.5-3.02",
+		key: "ptglia"
+	}],
+	["path", {
+		d: "M2 12a10 10 0 0 1 18-6",
+		key: "ydlgp0"
+	}],
+	["path", {
+		d: "M2 16h.01",
+		key: "1gqxmh"
+	}],
+	["path", {
+		d: "M21.8 16c.2-2 .131-5.354 0-6",
+		key: "drycrb"
+	}],
+	["path", {
+		d: "M5 19.5C5.5 18 6 15 6 12a6 6 0 0 1 .34-2",
+		key: "1tidbn"
+	}],
+	["path", {
+		d: "M8.65 22c.21-.66.45-1.32.57-2",
+		key: "13wd9y"
+	}],
+	["path", {
+		d: "M9 6.8a6 6 0 0 1 9 5.2v2",
+		key: "1fr1j5"
+	}]
+]);
+//#endregion
 //#region node_modules/lucide-react/dist/esm/icons/github.js
 /**
 * @license lucide-react v0.462.0 - ISC
@@ -276,6 +354,28 @@ var GraduationCap = createLucideIcon("GraduationCap", [
 	}]
 ]);
 //#endregion
+//#region node_modules/lucide-react/dist/esm/icons/layers.js
+/**
+* @license lucide-react v0.462.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Layers = createLucideIcon("Layers", [
+	["path", {
+		d: "m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z",
+		key: "8b97xw"
+	}],
+	["path", {
+		d: "m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65",
+		key: "dd6zsq"
+	}],
+	["path", {
+		d: "m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65",
+		key: "ep9fru"
+	}]
+]);
+//#endregion
 //#region node_modules/lucide-react/dist/esm/icons/linkedin.js
 /**
 * @license lucide-react v0.462.0 - ISC
@@ -302,6 +402,26 @@ var Linkedin = createLucideIcon("Linkedin", [
 		key: "bt5ra8"
 	}]
 ]);
+//#endregion
+//#region node_modules/lucide-react/dist/esm/icons/lock.js
+/**
+* @license lucide-react v0.462.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Lock = createLucideIcon("Lock", [["rect", {
+	width: "18",
+	height: "11",
+	x: "3",
+	y: "11",
+	rx: "2",
+	ry: "2",
+	key: "1w4ew1"
+}], ["path", {
+	d: "M7 11V7a5 5 0 0 1 10 0v4",
+	key: "fwvmzm"
+}]]);
 //#endregion
 //#region node_modules/lucide-react/dist/esm/icons/mail.js
 /**
@@ -456,6 +576,36 @@ var Shield = createLucideIcon("Shield", [["path", {
 	key: "oel41y"
 }]]);
 //#endregion
+//#region node_modules/lucide-react/dist/esm/icons/sparkles.js
+/**
+* @license lucide-react v0.462.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Sparkles = createLucideIcon("Sparkles", [
+	["path", {
+		d: "M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z",
+		key: "4pj2yx"
+	}],
+	["path", {
+		d: "M20 3v4",
+		key: "1olli1"
+	}],
+	["path", {
+		d: "M22 5h-4",
+		key: "1gvqau"
+	}],
+	["path", {
+		d: "M4 17v2",
+		key: "vumght"
+	}],
+	["path", {
+		d: "M5 18H3",
+		key: "zchphs"
+	}]
+]);
+//#endregion
 //#region node_modules/lucide-react/dist/esm/icons/terminal.js
 /**
 * @license lucide-react v0.462.0 - ISC
@@ -529,4 +679,4 @@ var Zap = createLucideIcon("Zap", [["path", {
 	key: "1xq2db"
 }]]);
 //#endregion
-export { FileDown as _, Shield as a, Calendar as b, Minus as c, MapPin as d, Mail as f, FileText as g, Github as h, Terminal as i, Menu as l, GraduationCap as m, X as n, ShieldCheck as o, Linkedin as p, Users as r, Send as s, Zap as t, Maximize2 as u, Download as v, Cpu as y };
+export { Download as C, Calendar as E, FastForward as S, CircleCheck as T, GraduationCap as _, Sparkles as a, FileText as b, Send as c, Maximize2 as d, MapPin as f, Layers as g, Linkedin as h, Terminal as i, Minus as l, Lock as m, X as n, Shield as o, Mail as p, Users as r, ShieldCheck as s, Zap as t, Menu as u, Github as v, Cpu as w, FileDown as x, Fingerprint as y };
