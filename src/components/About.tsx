@@ -1,86 +1,99 @@
 import { motion } from "framer-motion";
 import { Section } from "./Section";
-import { GraduationCap, MapPin, Calendar, Zap } from "lucide-react";
+import { GraduationCap, MapPin, Calendar, Zap, Shield, Fingerprint } from "lucide-react";
 
 export function About() {
   return (
     <Section id="about" index="01" title="about.md">
       <div className="grid gap-12 md:grid-cols-5 items-start">
         {/* ── LEFT: bio + education ── */}
-        <div className="md:col-span-3 space-y-5">
-          {/* Terminal bio */}
+        <div className="md:col-span-3 space-y-6">
+          {/* Terminal bio with Scanline effect */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-10% 0px" }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="overflow-hidden rounded-lg border border-border bg-card/60 shadow-[0_0_20px_rgba(0,0,0,0.5)] backdrop-blur-sm"
+            className="relative overflow-hidden rounded-xl border border-primary/30 bg-[#070b12]/90 shadow-[0_0_30px_rgba(0,0,0,0.6)] backdrop-blur-md"
           >
+            {/* Subtle Glowing Scanline Mesh */}
+            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(0,255,157,0.03)_1px,transparent_1px)] bg-[size:100%_4px]" />
+
             {/* Top bar */}
-            <div className="flex items-center gap-1.5 border-b border-border bg-surface/60 px-4 py-2.5">
-              <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
-              <span className="h-2.5 w-2.5 rounded-full bg-[#ffbd2e]" />
-              <span className="h-2.5 w-2.5 rounded-full bg-[#28c840]" />
-              <span className="ml-3 font-mono text-xs text-muted-foreground">~/about.md</span>
+            <div className="flex items-center justify-between border-b border-border/60 bg-surface/80 px-4 py-3">
+              <div className="flex items-center gap-2">
+                <span className="h-2.5 w-2.5 rounded-full bg-red-500/80" />
+                <span className="h-2.5 w-2.5 rounded-full bg-yellow-500/80" />
+                <span className="h-2.5 w-2.5 rounded-full bg-green-500/80" />
+                <span className="ml-3 font-mono text-xs font-semibold text-foreground/80">~/about.md</span>
+              </div>
+              <span className="font-mono text-[11px] text-primary/80 flex items-center gap-1">
+                <Shield size={12} className="animate-pulse" /> ENCRYPTED_PROFILE
+              </span>
             </div>
 
-            <div className="p-5 font-mono">
+            <div className="relative z-10 p-6 font-mono">
               {/* prompt */}
-              <p className="mb-3 text-xs">
-                <span className="text-primary/80">$ </span>
-                <span className="text-muted-foreground/70">cat about.md</span>
+              <p className="mb-4 text-xs sm:text-sm">
+                <span className="text-primary font-bold">$ </span>
+                <span className="text-foreground/90 font-semibold">cat about.md --decrypt</span>
               </p>
 
               {/* bio */}
-              <div className="border-l-2 border-primary/30 pl-4">
-                <p className="font-sans text-sm leading-[1.85] text-muted-foreground">
+              <div className="border-l-2 border-primary/40 pl-5 space-y-3">
+                <p className="font-sans text-sm sm:text-base leading-[1.85] text-muted-foreground">
                   Engineering undergraduate building a foundation in cybersecurity through{" "}
-                  <span className="text-primary font-medium">self-directed, hands-on training</span> and CTFs.
+                  <span className="text-primary font-semibold">self-directed, hands-on training</span> and CTFs.
                   Learning{" "}
-                  <span className="text-primary font-medium">web application security</span>,{" "}
-                  <span className="text-primary font-medium">network forensics</span>, and{" "}
-                  <span className="text-primary font-medium">Linux-based security tooling</span> via
+                  <span className="text-primary font-semibold">web application security</span>,{" "}
+                  <span className="text-primary font-semibold">network forensics</span>, and{" "}
+                  <span className="text-primary font-semibold">Linux-based security tooling</span> via
                   structured platforms like{" "}
-                  <span className="text-secondary">TryHackMe</span>,{" "}
-                  <span className="text-secondary">PortSwigger Web Security Academy</span>, and{" "}
-                  <span className="text-secondary">OverTheWire</span>, with growing hands-on exposure
+                  <span className="text-secondary font-semibold">TryHackMe</span>,{" "}
+                  <span className="text-secondary font-semibold">PortSwigger Web Security Academy</span>, and{" "}
+                  <span className="text-secondary font-semibold">OverTheWire</span>, with growing hands-on exposure
                   to{" "}
-                  <span className="text-secondary">Burp Suite</span>,{" "}
-                  <span className="text-secondary">Wireshark</span>, and{" "}
-                  <span className="text-secondary">Metasploit</span>.
+                  <span className="text-secondary font-semibold">Burp Suite</span>,{" "}
+                  <span className="text-secondary font-semibold">Wireshark</span>, and{" "}
+                  <span className="text-secondary font-semibold">Metasploit</span>.
                 </p>
               </div>
             </div>
           </motion.div>
 
-          {/* Education card */}
+          {/* Education card formatted as High-Tech Security Clearance Badge */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-10% 0px" }}
             transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
-            className="rounded-lg border border-secondary/25 bg-card/60 p-5 transition-all hover:border-secondary/50 hover:shadow-[0_0_24px_rgba(0,217,255,0.07)] backdrop-blur-sm"
+            className="relative overflow-hidden rounded-xl border border-secondary/40 bg-[#070b12]/90 p-6 transition-all hover:border-secondary/70 hover:shadow-[0_0_30px_rgba(0,217,255,0.15)] backdrop-blur-md"
           >
-            <div className="flex items-start gap-4">
-              <div className="grid h-11 w-11 shrink-0 place-items-center rounded border border-secondary/30 bg-secondary/10 text-secondary">
-                <GraduationCap size={20} />
+            <div className="absolute top-0 right-0 bg-secondary/15 px-3 py-1 rounded-bl-lg border-b border-l border-secondary/30 font-mono text-[10px] text-secondary flex items-center gap-1.5">
+              <Fingerprint size={11} className="animate-pulse" />
+              <span>ID_CARD // THAPAR_INST</span>
+            </div>
+
+            <div className="flex items-start gap-4 pt-1">
+              <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl border border-secondary/40 bg-secondary/10 text-secondary shadow-[0_0_15px_rgba(0,217,255,0.2)]">
+                <GraduationCap size={22} />
               </div>
               <div className="min-w-0 flex-1">
-                <p className="font-mono text-[10px] uppercase tracking-[0.15em] text-secondary/70 mb-1">
-                  education
+                <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-secondary/80 font-bold mb-1">
+                  Education Credential
                 </p>
-                <p className="font-mono text-sm font-semibold text-foreground leading-snug">
+                <p className="font-mono text-base font-bold text-foreground leading-snug">
                   Thapar Institute of Engineering &amp; Technology
                 </p>
-                <p className="mt-0.5 text-xs text-muted-foreground">
+                <p className="mt-1 text-sm text-muted-foreground font-sans">
                   B.E. Electronics and Computer Engineering
                 </p>
-                <div className="mt-2.5 flex flex-wrap items-center gap-3 font-mono text-[10px] text-muted-foreground">
-                  <span className="flex items-center gap-1.5">
-                    <Calendar size={10} className="text-primary" /> Aug 2025 – Present
+                <div className="mt-3.5 flex flex-wrap items-center gap-4 font-mono text-xs text-muted-foreground">
+                  <span className="flex items-center gap-1.5 border border-border/50 bg-surface/50 px-2.5 py-1 rounded">
+                    <Calendar size={12} className="text-primary" /> Aug 2025 – Present
                   </span>
-                  <span className="flex items-center gap-1.5">
-                    <MapPin size={10} className="text-secondary" /> Patiala, India
+                  <span className="flex items-center gap-1.5 border border-border/50 bg-surface/50 px-2.5 py-1 rounded">
+                    <MapPin size={12} className="text-secondary" /> Patiala, India
                   </span>
                 </div>
               </div>
@@ -93,20 +106,20 @@ export function About() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-10% 0px" }}
             transition={{ duration: 0.6, delay: 0.25, ease: "easeOut" }}
-            className="flex flex-wrap gap-2"
+            className="flex flex-wrap gap-2.5"
           >
             {[
               "Web AppSec",
               "Network Forensics",
               "Linux Security",
               "CTF Enthusiast",
-              "Red Team Learner",
+              "Offensive Security Learner",
             ].map((tag) => (
               <span
                 key={tag}
-                className="inline-flex items-center gap-1.5 rounded-full border border-primary/25 bg-primary/5 px-3 py-1 font-mono text-[10px] text-primary/80 transition-colors hover:bg-primary/20"
+                className="inline-flex items-center gap-1.5 rounded-lg border border-primary/30 bg-primary/10 px-3.5 py-1.5 font-mono text-xs text-primary transition-all hover:bg-primary/20 hover:border-primary/60 hover:shadow-[0_0_12px_rgba(0,255,157,0.2)]"
               >
-                <Zap size={9} /> {tag}
+                <Zap size={11} /> {tag}
               </span>
             ))}
           </motion.div>
@@ -118,20 +131,20 @@ export function About() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, margin: "-10% 0px" }}
           transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
-          className="md:col-span-2 flex justify-center items-center pt-4"
+          className="md:col-span-2 flex justify-center items-center pt-6 lg:pt-10"
         >
           <div className="relative hex-glow">
             {/* SVG hexagon border */}
             <svg
-              width="228"
-              height="264"
+              width="240"
+              height="276"
               viewBox="0 0 228 264"
               className="absolute inset-0 w-full h-full pointer-events-none"
             >
               <defs>
                 <linearGradient id="hexStrokeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%"   stopColor="#00ff9d" stopOpacity="0.9" />
-                  <stop offset="50%"  stopColor="#00d9ff" stopOpacity="0.75" />
+                  <stop offset="0%" stopColor="#00ff9d" stopOpacity="0.9" />
+                  <stop offset="50%" stopColor="#00d9ff" stopOpacity="0.75" />
                   <stop offset="100%" stopColor="#00ff9d" stopOpacity="0.9" />
                 </linearGradient>
               </defs>
@@ -140,25 +153,25 @@ export function About() {
                 points="114,6 220,63 220,201 114,258 8,201 8,63"
                 fill="none"
                 stroke="url(#hexStrokeGrad)"
-                strokeWidth="1.5"
+                strokeWidth="2"
                 strokeDasharray="6 3"
-                opacity="0.7"
+                opacity="0.8"
               />
               {/* Inner solid ring */}
               <polygon
                 points="114,14 212,68 212,196 114,250 16,196 16,68"
-                fill="rgba(0,255,157,0.03)"
-                stroke="rgba(0,255,157,0.18)"
-                strokeWidth="0.8"
+                fill="rgba(0,255,157,0.04)"
+                stroke="rgba(0,255,157,0.25)"
+                strokeWidth="1"
               />
             </svg>
 
             {/* Clipped content */}
             <div
-              className="relative z-10 flex items-center justify-center bg-card/85 backdrop-blur-sm"
+              className="relative z-10 flex items-center justify-center bg-[#080d17]/90 backdrop-blur-md"
               style={{
-                width: 214,
-                height: 248,
+                width: 226,
+                height: 260,
                 clipPath:
                   "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
               }}
@@ -166,20 +179,20 @@ export function About() {
               <div className="flex flex-col items-center gap-2 select-none">
                 {/* Initials with glitch */}
                 <span
-                  className="font-mono text-6xl font-extrabold text-gradient-neon hero-name-glitch"
+                  className="font-mono text-7xl font-extrabold text-gradient-neon hero-name-glitch"
                   style={{ letterSpacing: "-0.04em" }}
                 >
                   AM
                 </span>
-                <p className="font-mono text-[9px] tracking-[0.3em] uppercase text-muted-foreground">
+                <p className="font-mono text-[10px] tracking-[0.3em] uppercase text-muted-foreground font-semibold">
                   armaan.malhotra
                 </p>
                 {/* Activity dots */}
-                <div className="flex gap-1.5 mt-1">
-                  {[0, 0.5, 1].map((d) => (
+                <div className="flex gap-2 mt-2">
+                  {[0, 0.4, 0.8].map((d) => (
                     <span
                       key={d}
-                      className="h-1 w-1 rounded-full bg-primary animate-pulse"
+                      className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse shadow-[0_0_6px_#00ff9d]"
                       style={{ animationDelay: `${d}s` }}
                     />
                   ))}
@@ -188,13 +201,13 @@ export function About() {
             </div>
 
             {/* Floating corner badges */}
-            <span className="absolute -bottom-3 -right-7 rounded border border-primary/35 bg-[#0a0e14]/90 px-2.5 py-1 font-mono text-[9px] text-primary backdrop-blur-sm shadow-[0_0_10px_rgba(0,255,157,0.2)]">
+            <span className="absolute -bottom-3 -right-6 rounded-md border border-primary/45 bg-[#080d17]/95 px-3 py-1 font-mono text-[10px] font-bold text-primary backdrop-blur-sm shadow-[0_0_14px_rgba(0,255,157,0.3)]">
               CTF_PLAYER
             </span>
-            <span className="absolute -top-3 -left-7 rounded border border-secondary/35 bg-[#0a0e14]/90 px-2.5 py-1 font-mono text-[9px] text-secondary backdrop-blur-sm shadow-[0_0_10px_rgba(0,217,255,0.2)]">
-              SEC_LEARNER
+            <span className="absolute -top-3 -left-6 rounded-md border border-secondary/45 bg-[#080d17]/95 px-3 py-1 font-mono text-[10px] font-bold text-secondary backdrop-blur-sm shadow-[0_0_14px_rgba(0,217,255,0.3)]">
+              SEC_RESEARCHER
             </span>
-            <span className="absolute top-1/2 -right-10 -translate-y-1/2 rounded border border-primary/20 bg-[#0a0e14]/90 px-2 py-0.5 font-mono text-[9px] text-primary/60 backdrop-blur-sm">
+            <span className="absolute top-1/2 -right-12 -translate-y-1/2 rounded border border-primary/30 bg-[#080d17]/95 px-2.5 py-1 font-mono text-[10px] text-primary/80 backdrop-blur-sm">
               root@kali
             </span>
           </div>
@@ -203,4 +216,3 @@ export function About() {
     </Section>
   );
 }
-

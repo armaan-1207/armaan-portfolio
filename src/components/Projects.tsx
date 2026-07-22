@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Github, Users, Terminal } from "lucide-react";
+import { Github, Users, Terminal, ShieldAlert, Sparkles } from "lucide-react";
 import { Section } from "./Section";
 import { TiltCard } from "./TiltCard";
 
@@ -27,7 +27,7 @@ const PROJECTS = [
 export function Projects() {
   return (
     <Section id="projects" index="03" title="projects.build()">
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="grid gap-8 md:grid-cols-2 w-full">
         {PROJECTS.map((p, i) => (
           <motion.div
             key={p.name}
@@ -38,21 +38,27 @@ export function Projects() {
             className="h-full"
           >
             <TiltCard className="h-full">
-              <article className="tilt-card-inner h-full overflow-hidden rounded-lg border border-border bg-card/60 transition-all hover:border-primary/55 hover:shadow-[0_0_36px_rgba(0,255,157,0.12)] backdrop-blur-sm">
+              <article className="tilt-card-inner relative h-full flex flex-col overflow-hidden rounded-xl border border-border/80 bg-[#070b12]/90 transition-all hover:border-primary/60 hover:shadow-[0_0_40px_rgba(0,255,157,0.15)] backdrop-blur-md">
+                {/* Futuristic Corner HUD Crosshairs */}
+                <div className="pointer-events-none absolute top-0 left-0 h-4 w-4 border-t-2 border-l-2 border-primary/60" />
+                <div className="pointer-events-none absolute top-0 right-0 h-4 w-4 border-t-2 border-r-2 border-primary/60" />
+                <div className="pointer-events-none absolute bottom-0 left-0 h-4 w-4 border-b-2 border-l-2 border-primary/60" />
+                <div className="pointer-events-none absolute bottom-0 right-0 h-4 w-4 border-b-2 border-r-2 border-primary/60" />
+
                 {/* Top bar */}
-                <div className="flex items-center gap-1.5 border-b border-border bg-surface/55 px-4 py-3">
-                  <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
-                  <span className="h-2.5 w-2.5 rounded-full bg-[#ffbd2e]" />
-                  <span className="h-2.5 w-2.5 rounded-full bg-[#28c840]" />
+                <div className="flex items-center gap-2 border-b border-border/60 bg-surface/80 px-5 py-3.5">
+                  <span className="h-2.5 w-2.5 rounded-full bg-red-500/80" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-yellow-500/80" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-green-500/80" />
                   <div className="ml-3 flex min-w-0 flex-1 items-center gap-2">
-                    <Terminal size={12} className="shrink-0 text-primary" />
-                    <span className="truncate font-mono text-xs text-muted-foreground">
+                    <Terminal size={14} className="shrink-0 text-primary animate-pulse" />
+                    <span className="truncate font-mono text-xs font-semibold text-foreground/90">
                       ~/{p.name.toLowerCase().replace(/\s/g, "-")}
                     </span>
                   </div>
                   {p.featured && (
-                    <span className="shrink-0 rounded-full border border-secondary/40 bg-secondary/10 px-2 py-0.5 font-mono text-[10px] text-secondary shadow-[0_0_8px_rgba(0,217,255,0.2)]">
-                      featured
+                    <span className="shrink-0 flex items-center gap-1 rounded-full border border-secondary/50 bg-secondary/15 px-2.5 py-0.5 font-mono text-[10px] font-bold text-secondary shadow-[0_0_12px_rgba(0,217,255,0.3)]">
+                      <Sparkles size={10} /> FEATURED
                     </span>
                   )}
                   <a
@@ -60,41 +66,41 @@ export function Projects() {
                     target="_blank"
                     rel="noreferrer"
                     aria-label={`${p.name} on GitHub`}
-                    className="ml-1 shrink-0 text-muted-foreground transition-colors hover:text-primary"
+                    className="ml-2 shrink-0 rounded-lg p-1.5 text-muted-foreground transition-all hover:bg-primary/10 hover:text-primary"
                   >
-                    <Github size={14} />
+                    <Github size={16} />
                   </a>
                 </div>
 
                 {/* Body */}
-                <div className="flex flex-col gap-4 p-5">
+                <div className="flex flex-col gap-5 p-6 flex-1">
                   {/* Title */}
                   <div>
-                    <h3 className="font-mono text-xl font-bold text-foreground transition-colors">
+                    <h3 className="font-mono text-2xl font-bold text-foreground transition-colors group-hover:text-primary">
                       {p.name}
                     </h3>
-                    <p className="mt-0.5 font-mono text-xs text-primary/70">{p.subtitle}</p>
+                    <p className="mt-1 font-mono text-xs font-semibold text-primary/80">{p.subtitle}</p>
                   </div>
 
                   {/* Description */}
-                  <p className="text-sm leading-[1.8] text-muted-foreground">{p.desc}</p>
+                  <p className="text-sm sm:text-base leading-[1.8] text-muted-foreground">{p.desc}</p>
 
                   {/* Meta */}
-                  <div className="flex flex-wrap gap-3">
+                  <div className="flex flex-wrap gap-4 pt-2">
                     {p.meta.map((m) => (
-                      <span key={m} className="flex items-center gap-1.5 font-mono text-[10px] text-muted-foreground">
-                        <Users size={9} className="text-secondary" />
+                      <span key={m} className="flex items-center gap-1.5 font-mono text-xs font-semibold text-secondary">
+                        <Users size={12} className="text-secondary animate-pulse" />
                         {m}
                       </span>
                     ))}
                   </div>
 
                   {/* Stack tags */}
-                  <div className="mt-auto flex flex-wrap gap-1.5">
+                  <div className="mt-auto pt-4 flex flex-wrap gap-2 border-t border-border/40">
                     {p.tags.map((t) => (
                       <span
                         key={t}
-                        className="rounded border border-border bg-surface/50 px-2 py-0.5 font-mono text-[11px] text-muted-foreground transition-colors hover:border-primary/30 hover:text-primary hover:bg-primary/10"
+                        className="rounded-md border border-border/70 bg-surface/60 px-2.5 py-1 font-mono text-xs text-muted-foreground transition-all hover:border-primary/50 hover:text-primary hover:bg-primary/10 hover:shadow-[0_0_10px_rgba(0,255,157,0.15)]"
                       >
                         {t}
                       </span>
@@ -109,4 +115,3 @@ export function Projects() {
     </Section>
   );
 }
-
