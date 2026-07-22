@@ -60,7 +60,7 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
     }, 70);
 
     return () => clearInterval(interval);
-  }, [onDone]);
+  }, []);
 
   return (
     <div
