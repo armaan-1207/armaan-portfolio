@@ -15,6 +15,7 @@ import { Footer } from "@/components/Footer";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { StatusBar } from "@/components/StatusBar";
 import { SmoothScroll } from "@/components/SmoothScroll";
+import { CustomCursor } from "@/components/CustomCursor";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -48,6 +49,8 @@ function Home() {
 
   return (
     <SmoothScroll>
+      <CustomCursor />
+      
       <AnimatePresence mode="wait">
         {loading && (
           <motion.div
@@ -71,12 +74,12 @@ function Home() {
         initial={{ opacity: hasPlayed && !loading ? 1 : 0 }}
         animate={{ opacity: loading ? 0 : 1 }}
         transition={{ duration: 0.7, ease: "easeOut", delay: loading ? 0 : 0.15 }}
-        className="relative min-h-screen bg-[#0a0e14] text-foreground"
+        className="relative min-h-screen bg-[#0a0e14] text-foreground cursor-none"
       >
         {/* Global terminal-environment background layers */}
         <div
           aria-hidden
-          className="pointer-events-none fixed inset-0 z-0 grid-bg opacity-[0.35]"
+          className="pointer-events-none fixed inset-0 z-0 grid-bg opacity-[0.25]"
         />
         <div
           aria-hidden

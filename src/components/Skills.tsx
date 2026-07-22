@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from "react";
-import { useInView } from "framer-motion";
 import { Section } from "./Section";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 // ── Content definition ──────────────────────────────────────────────────────
 
@@ -49,13 +50,25 @@ const LINES: Line[] = [
 
 export function Skills() {
   const termRef = useRef<HTMLDivElement>(null);
-  const inView   = useInView(termRef, { once: true, margin: "-15% 0px" });
+  const [inView, setInView] = useState(false);
 
   // Typing state machine
   type Phase = "idle" | "cmd" | "content" | "done";
   const [phase,        setPhase]        = useState<Phase>("idle");
   const [cmdChars,     setCmdChars]     = useState(0);
   const [visibleLines, setVisibleLines] = useState(0);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      ScrollTrigger.create({
+        trigger: termRef.current,
+        start: "top 85%",
+        once: true,
+        onEnter: () => setInView(true)
+      });
+    }, termRef);
+    return () => ctx.revert();
+  }, []);
 
   // Trigger on first viewport entry
   useEffect(() => {
