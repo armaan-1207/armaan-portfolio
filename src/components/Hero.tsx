@@ -1,11 +1,11 @@
-import { useEffect, useRef, useState } from "react";
-import { Github, Linkedin, Mail, FileDown, Terminal, Shield, Maximize2, Minus, X } from "lucide-react";
-import React, { Suspense } from "react";
-const PulseNode = React.lazy(() => import("./PulseNode").then(m => ({ default: m.PulseNode })));
+import { useEffect, useRef, useState, Suspense, lazy } from "react";
+import { Github, Linkedin, Mail, FileDown, Terminal, Shield, Cpu, Activity } from "lucide-react";
 import gsap from "gsap";
 
+const PulseNode = lazy(() => import("./PulseNode").then((m) => ({ default: m.PulseNode })));
+
 const LINE_1 = "Hi, I'm Armaan Malhotra";
-const LINE_2 = "Cybersecurity Enthusiast | Breaking Systems to Understand Them";
+const LINE_2 = "DevSecOps Engineer // CTF Competitor // Ethical Hacker";
 const SCROLL_HINT = "[ scroll to decrypt ↓ ]";
 
 function useTyped(lines: string[], speed = 40, linePause = 400) {
@@ -73,30 +73,9 @@ function renderLine1(text: string) {
     <>
       {text.slice(0, idx)}
       <span
-        className="text-primary hero-name-glitch"
-        style={{ textShadow: "0 0 14px rgba(0,255,157,0.85)" }}
+        className="text-primary hero-name-glitch font-black"
+        style={{ textShadow: "0 0 20px rgba(0,255,157,0.85)" }}
         data-text={target}
-      >
-        {text.slice(idx, idx + target.length)}
-      </span>
-      {text.slice(idx + target.length)}
-    </>
-  );
-}
-
-function renderLine2(text: string) {
-  const target = "Breaking";
-  const idx = text.indexOf(target);
-  if (idx === -1) return <>{text}</>;
-  return (
-    <>
-      {text.slice(0, idx)}
-      <span
-        style={{
-          color: "#00d9ff",
-          textShadow:
-            "0 0 8px rgba(0,217,255,0.9), 0 0 18px rgba(0,217,255,0.55)",
-        }}
       >
         {text.slice(idx, idx + target.length)}
       </span>
@@ -111,7 +90,7 @@ export function Hero() {
 
   const heroContentRef = useRef<HTMLDivElement>(null);
   const [mounted, setMounted] = useState(false);
-  
+
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -120,8 +99,8 @@ export function Hero() {
     if (heroContentRef.current) {
       gsap.fromTo(
         heroContentRef.current,
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }
+        { opacity: 0, y: 25 },
+        { opacity: 1, y: 0, duration: 0.9, ease: "power3.out" }
       );
     }
   }, []);
@@ -132,41 +111,23 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="relative flex flex-col w-full overflow-hidden rounded-lg border border-border/80 bg-[#0a0f18]/80 shadow-[0_0_30px_rgba(0,0,0,0.6)] backdrop-blur-md"
+      className="relative flex flex-col w-full overflow-hidden rounded-xl border border-primary/20 bg-[#070b12]/80 shadow-[0_0_40px_rgba(0,0,0,0.8)] backdrop-blur-xl p-6 sm:p-10 lg:p-12"
     >
-      {/* Tiling Window Top Bar */}
-      <div className="flex items-center justify-between border-b border-border/60 bg-surface/80 px-4 py-2 relative z-20">
-        <div className="flex items-center gap-3">
-          <span className="font-mono text-xs font-bold text-primary">
-            [00]
-          </span>
-          <h2 className="font-mono text-sm tracking-tight text-muted-foreground">
-            <span className="text-foreground/90">dashboard</span>
-            <span className="text-primary/80">.exe</span>
-          </h2>
-        </div>
-        <div className="flex items-center gap-2 text-muted-foreground/50">
-          <Minus size={14} className="hover:text-primary transition-colors cursor-pointer" />
-          <Maximize2 size={12} className="hover:text-primary transition-colors cursor-pointer" />
-          <X size={14} className="hover:text-red-400 transition-colors cursor-pointer" />
-        </div>
-      </div>
+      {/* Background Accent Grids */}
+      <div className="pointer-events-none absolute inset-0 z-0 grid-bg opacity-30" />
+      <div className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-r from-[#070b12] via-transparent to-[#070b12]/80" />
 
-      {/* Background Grid Accent */}
-      <div className="pointer-events-none absolute inset-0 z-[1] grid-bg opacity-20" />
-      <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-transparent via-[#070b10]/50 to-[#070b10]" />
-
-      {/* Split Container */}
+      {/* Main 2-Column Hero Container */}
       <div
         ref={heroContentRef}
-        className="relative z-10 mx-auto flex min-h-[calc(100vh-12rem)] w-full flex-col justify-center px-6 lg:px-12 py-12 lg:flex-row lg:items-center lg:gap-12"
+        className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center min-h-[78vh]"
       >
-        {/* Left Side: Bio & Controls */}
-        <div className="flex-1 max-w-2xl">
+        {/* Left Column: Bio & Hero CTAs */}
+        <div className="lg:col-span-7 flex flex-col justify-center">
           {/* Neofetch Badge */}
-          <div className="mb-6 inline-flex items-center gap-2 rounded-md border border-primary/40 bg-primary/10 px-3.5 py-1.5 font-mono text-xs text-primary backdrop-blur-sm shadow-[0_0_15px_rgba(0,255,157,0.2)]">
+          <div className="mb-6 inline-flex items-center gap-2 self-start rounded-md border border-primary/40 bg-primary/10 px-3.5 py-1.5 font-mono text-xs text-primary backdrop-blur-sm shadow-[0_0_18px_rgba(0,255,157,0.2)]">
             <Shield size={14} className="animate-pulse" />
-            <span className="font-semibold tracking-wide">ROLE: DEVSECOPS &amp; PENTESTING</span>
+            <span className="font-semibold tracking-wide">$ whoami --role="DevSecOps & Pentesting"</span>
           </div>
 
           {/* Main Headline */}
@@ -176,27 +137,36 @@ export function Hero() {
           </h1>
 
           {/* Subheading */}
-          <p className="mb-8 min-h-[2.5em] font-mono text-base text-muted-foreground sm:text-lg lg:text-xl">
-            {renderLine2(out[1])}
-            {(line2Active || done) && (
-              <span className="animate-blink text-primary">_</span>
-            )}
+          <p className="mb-8 min-h-[2.5em] font-mono text-base text-muted-foreground sm:text-lg lg:text-xl leading-relaxed">
+            {out[1]}
+            {(line2Active || done) && <span className="animate-blink text-primary">_</span>}
           </p>
 
-          {/* Quick Stats Window / Linux Rice Card */}
-          <div className="mb-8 overflow-hidden rounded-lg border border-border/80 bg-[#0d131f]/80 p-4 font-mono text-xs shadow-xl backdrop-blur-md">
+          {/* Quick Terminal Stats Card */}
+          <div className="mb-8 overflow-hidden rounded-lg border border-primary/20 bg-[#0d131f]/90 p-4 font-mono text-xs shadow-xl backdrop-blur-md">
             <div className="mb-2 flex items-center justify-between border-b border-border/60 pb-2 text-muted-foreground">
               <span className="flex items-center gap-1.5">
-                <Terminal size={12} className="text-primary" />
-                armaan@kali-rice ~
+                <Terminal size={13} className="text-primary" />
+                armaan@kali-box ~
               </span>
-              <span className="text-[10px] text-primary/70">OS: Kali Linux 2026</span>
+              <span className="flex items-center gap-1 text-[11px] text-primary">
+                <Activity size={12} className="animate-pulse" />
+                SYSTEM READY
+              </span>
             </div>
-            <div className="grid grid-cols-2 gap-2 text-foreground/80">
-              <div><span className="text-secondary">Uptime:</span> 100% active</div>
-              <div><span className="text-secondary">Focus:</span> Web Security / CTFs</div>
-              <div><span className="text-secondary">Shell:</span> Zsh / Bash</div>
-              <div><span className="text-secondary">Status:</span> Open to Security Roles</div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-foreground/80">
+              <div>
+                <span className="text-secondary font-semibold">Uptime:</span> 100% active
+              </div>
+              <div>
+                <span className="text-secondary font-semibold">Focus:</span> Web Security / CTFs
+              </div>
+              <div>
+                <span className="text-secondary font-semibold">Shell:</span> Zsh / Bash
+              </div>
+              <div>
+                <span className="text-secondary font-semibold">Status:</span> Open to Security Roles
+              </div>
             </div>
           </div>
 
@@ -204,19 +174,19 @@ export function Hero() {
           <div className="flex flex-wrap gap-4 font-mono text-sm">
             <a
               href="#projects"
-              className="glitch-btn scan-btn group relative inline-flex items-center gap-2 rounded border border-primary bg-primary/10 px-5 py-3 text-primary transition-all hover:bg-primary/20 hover:glow-neon"
+              className="glitch-btn scan-btn group relative inline-flex items-center gap-2 rounded border border-primary bg-primary/10 px-6 py-3.5 text-primary font-semibold transition-all hover:bg-primary/20 hover:glow-neon"
               data-text="View Projects"
             >
-              <Terminal size={16} />
+              <Terminal size={17} />
               <span className="relative z-[2]">View Projects</span>
             </a>
             <a
               href="/Resume.pdf"
               download
-              className="glitch-btn scan-btn group relative inline-flex items-center gap-2 rounded border border-secondary bg-secondary/5 px-5 py-3 text-secondary transition-all hover:bg-secondary/15 hover:glow-cyan"
+              className="glitch-btn scan-btn group relative inline-flex items-center gap-2 rounded border border-secondary bg-secondary/5 px-6 py-3.5 text-secondary font-semibold transition-all hover:bg-secondary/15 hover:glow-cyan"
               data-text="Download Resume"
             >
-              <FileDown size={16} />
+              <FileDown size={17} />
               <span className="relative z-[2]">Download Resume</span>
             </a>
           </div>
@@ -228,7 +198,7 @@ export function Hero() {
               target="_blank"
               rel="noreferrer"
               aria-label="GitHub"
-              className="social-icon text-muted-foreground hover:text-primary transition-colors"
+              className="social-icon text-muted-foreground hover:text-primary transition-colors p-2 rounded-lg border border-border/50 hover:border-primary/50 bg-card/40"
             >
               <Github size={20} />
             </a>
@@ -237,49 +207,55 @@ export function Hero() {
               target="_blank"
               rel="noreferrer"
               aria-label="LinkedIn"
-              className="social-icon text-muted-foreground hover:text-secondary transition-colors"
+              className="social-icon text-muted-foreground hover:text-secondary transition-colors p-2 rounded-lg border border-border/50 hover:border-secondary/50 bg-card/40"
             >
               <Linkedin size={20} />
             </a>
             <a
               href="mailto:amalhotra1be25@thapar.edu"
               aria-label="Email"
-              className="social-icon text-muted-foreground hover:text-primary transition-colors"
+              className="social-icon text-muted-foreground hover:text-primary transition-colors p-2 rounded-lg border border-border/50 hover:border-primary/50 bg-card/40"
             >
               <Mail size={20} />
             </a>
           </div>
         </div>
 
-        {/* Right Side: 3D Pulse Core Graphic */}
-        <div className="mt-8 flex-1 lg:mt-0">
-          <div className="relative rounded-2xl border border-primary/20 bg-card/40 p-2 shadow-[0_0_40px_rgba(0,255,157,0.08)] backdrop-blur-md">
-            {/* Top Bar for 3D Window Pane */}
-            <div className="flex items-center justify-between border-b border-border/40 bg-surface/60 px-4 py-2">
+        {/* Right Column: Interactive 3D Core Visualizer */}
+        <div className="lg:col-span-5 flex justify-center w-full">
+          <div className="relative w-full rounded-2xl border border-primary/30 bg-[#0a0f19]/90 p-3 shadow-[0_0_50px_rgba(0,255,157,0.12)] backdrop-blur-md">
+            {/* Top Window Bar */}
+            <div className="flex items-center justify-between border-b border-border/60 bg-surface/80 px-4 py-2 rounded-t-xl mb-2">
+              <div className="flex items-center gap-2">
+                <Cpu size={14} className="text-primary animate-pulse" />
+                <span className="font-mono text-xs font-semibold text-foreground/90">
+                  core_pulse_visualizer.3js
+                </span>
+              </div>
               <div className="flex gap-1.5">
                 <span className="h-2.5 w-2.5 rounded-full bg-red-500/80" />
                 <span className="h-2.5 w-2.5 rounded-full bg-yellow-500/80" />
                 <span className="h-2.5 w-2.5 rounded-full bg-green-500/80" />
               </div>
-              <span className="font-mono text-[11px] text-muted-foreground">core_pulse_visualizer.3js</span>
             </div>
 
-            {/* 3D Pulse Canvas */}
-            {mounted && (
-              <Suspense fallback={<div className="h-[380px] w-full sm:h-[450px] lg:h-[500px]" />}>
-                <PulseNode />
-              </Suspense>
-            )}
+            {/* 3D Pulse Canvas Container */}
+            <div className="relative h-[380px] sm:h-[450px] lg:h-[500px] w-full overflow-hidden rounded-xl bg-black/40">
+              {mounted && (
+                <Suspense fallback={<div className="h-full w-full flex items-center justify-center font-mono text-xs text-muted-foreground">Loading 3D Engine...</div>}>
+                  <PulseNode />
+                </Suspense>
+              )}
+            </div>
           </div>
         </div>
       </div>
 
       {/* Scroll Hint Footer */}
-      <div className="pointer-events-none absolute bottom-4 left-1/2 z-10 -translate-x-1/2 font-mono text-[10px] text-muted-foreground">
+      <div className="pointer-events-none mt-8 flex justify-center font-mono text-[11px] text-muted-foreground">
         {scrollHint}
         <span className="animate-blink text-primary">▋</span>
       </div>
     </section>
   );
 }
-

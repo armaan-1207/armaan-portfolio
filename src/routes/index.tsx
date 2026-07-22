@@ -100,31 +100,15 @@ function Home() {
           <ScrollProgress />
           <Nav />
           <StatusBar />
-          <main className="mx-auto max-w-[1600px] p-4 lg:p-6 flex flex-col lg:grid lg:grid-cols-12 gap-6 pt-24">
-            <div className="lg:col-span-12">
-              <Hero />
-            </div>
-            <div className="lg:col-span-7">
-              <About />
-            </div>
-            <div className="lg:col-span-5">
-              <Skills />
-            </div>
-            <div className="lg:col-span-12">
-              <Projects />
-            </div>
-            <div className="lg:col-span-6">
-              <CTFWriteups />
-            </div>
-            <div className="lg:col-span-6">
-              <Certifications />
-            </div>
-            <div className="lg:col-span-12">
-              <Experience />
-            </div>
-            <div className="lg:col-span-12">
-              <Contact />
-            </div>
+          <main className="mx-auto max-w-7xl px-4 sm:px-6 py-12 pt-28 flex flex-col gap-16 md:gap-24 w-full">
+            <Hero />
+            <About />
+            <Skills />
+            <Projects />
+            <CTFWriteups />
+            <Certifications />
+            <Experience />
+            <Contact />
           </main>
           <Footer />
         </div>
