@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from "react";
-import { Github, Linkedin, Mail, FileDown, Terminal } from "lucide-react";
-import { CyberGrid } from "./CyberGrid";
+import { Github, Linkedin, Mail, FileDown, Terminal, Shield } from "lucide-react";
+import { PulseNode } from "./PulseNode";
 import gsap from "gsap";
 
 const LINE_1 = "Hi, I'm Armaan Malhotra";
 const LINE_2 = "Cybersecurity Enthusiast | Breaking Systems to Understand Them";
 const SCROLL_HINT = "[ scroll to decrypt ↓ ]";
 
-function useTyped(lines: string[], speed = 45, linePause = 500) {
+function useTyped(lines: string[], speed = 40, linePause = 400) {
   const [out, setOut] = useState<string[]>(lines.map(() => ""));
   const [done, setDone] = useState(false);
 
@@ -45,7 +45,7 @@ function useTyped(lines: string[], speed = 45, linePause = 500) {
   return { out, done };
 }
 
-function useTypedString(text: string, speed = 55, startDelay = 400) {
+function useTypedString(text: string, speed = 55, startDelay = 1200) {
   const [out, setOut] = useState("");
   useEffect(() => {
     let cancelled = false;
@@ -110,13 +110,12 @@ export function Hero() {
 
   const heroContentRef = useRef<HTMLDivElement>(null);
 
-  // GSAP entrance animation for Hero text container
   useEffect(() => {
     if (heroContentRef.current) {
       gsap.fromTo(
         heroContentRef.current,
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 1, ease: "power3.out", delay: 0.2 }
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }
       );
     }
   }, []);
@@ -127,44 +126,57 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="relative min-h-screen w-full overflow-hidden bg-[#0a0e14]"
+      className="relative min-h-screen w-full overflow-hidden bg-[#070b10] pt-24 pb-16"
     >
-      {/* 3D CyberGrid background — ultra-lightweight Three.js canvas */}
-      <CyberGrid />
+      {/* Background Grid Accent */}
+      <div className="pointer-events-none absolute inset-0 z-[1] grid-bg opacity-20" />
+      <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-transparent via-[#070b10]/50 to-[#070b10]" />
 
-      {/* Grid overlay & subtle gradient */}
-      <div className="pointer-events-none absolute inset-0 z-[1] circuit-bg opacity-[0.15]" />
-      <div className="pointer-events-none absolute inset-0 z-[1] grid-bg opacity-15" />
-      <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-[#0a0e14]/40 via-transparent to-[#0a0e14]" />
-
-      {/* Hero Content */}
+      {/* Split Container */}
       <div
         ref={heroContentRef}
-        className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col justify-center px-6 pt-32 pb-24"
+        className="relative z-10 mx-auto flex min-h-[calc(100vh-6rem)] max-w-7xl flex-col justify-center px-6 lg:flex-row lg:items-center lg:gap-12"
       >
-        <div className="max-w-3xl">
-          {/* Badge */}
-          <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-primary/50 bg-primary/5 px-3.5 py-1 font-mono text-[11px] uppercase tracking-[0.18em] text-primary backdrop-blur-sm shadow-[0_0_12px_rgba(0,255,157,0.15)]">
-            <span aria-hidden>🛡</span>
-            Cybersecurity Enthusiast
+        {/* Left Side: Bio & Controls */}
+        <div className="flex-1 max-w-2xl">
+          {/* Neofetch Badge */}
+          <div className="mb-6 inline-flex items-center gap-2 rounded-md border border-primary/40 bg-primary/10 px-3.5 py-1.5 font-mono text-xs text-primary backdrop-blur-sm shadow-[0_0_15px_rgba(0,255,157,0.2)]">
+            <Shield size={14} className="animate-pulse" />
+            <span className="font-semibold tracking-wide">ROLE: DEVSECOPS &amp; PENTESTING</span>
           </div>
 
-          {/* Typed headline */}
-          <h1 className="mb-6 font-mono text-4xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl">
+          {/* Main Headline */}
+          <h1 className="mb-4 font-mono text-3xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl lg:text-6xl">
             {renderLine1(out[0])}
-            {line1Active && (
-              <span className="animate-blink text-primary">_</span>
-            )}
+            {line1Active && <span className="animate-blink text-primary">_</span>}
           </h1>
 
-          <p className="mb-12 min-h-[2em] font-mono text-lg text-muted-foreground sm:text-xl md:text-2xl">
+          {/* Subheading */}
+          <p className="mb-8 min-h-[2.5em] font-mono text-base text-muted-foreground sm:text-lg lg:text-xl">
             {renderLine2(out[1])}
             {(line2Active || done) && (
               <span className="animate-blink text-primary">_</span>
             )}
           </p>
 
-          {/* CTAs */}
+          {/* Quick Stats Window / Linux Rice Card */}
+          <div className="mb-8 overflow-hidden rounded-lg border border-border/80 bg-[#0d131f]/80 p-4 font-mono text-xs shadow-xl backdrop-blur-md">
+            <div className="mb-2 flex items-center justify-between border-b border-border/60 pb-2 text-muted-foreground">
+              <span className="flex items-center gap-1.5">
+                <Terminal size={12} className="text-primary" />
+                armaan@kali-rice ~
+              </span>
+              <span className="text-[10px] text-primary/70">OS: Kali Linux 2026</span>
+            </div>
+            <div className="grid grid-cols-2 gap-2 text-foreground/80">
+              <div><span className="text-secondary">Uptime:</span> 100% active</div>
+              <div><span className="text-secondary">Focus:</span> Web Security / CTFs</div>
+              <div><span className="text-secondary">Shell:</span> Zsh / Bash</div>
+              <div><span className="text-secondary">Status:</span> Open to Security Roles</div>
+            </div>
+          </div>
+
+          {/* Action CTAs */}
           <div className="flex flex-wrap gap-4 font-mono text-sm">
             <a
               href="#projects"
@@ -185,8 +197,8 @@ export function Hero() {
             </a>
           </div>
 
-          {/* Socials */}
-          <div className="mt-10 flex items-center gap-5">
+          {/* Social Links */}
+          <div className="mt-8 flex items-center gap-5">
             <a
               href="https://github.com/armaan-1207"
               target="_blank"
@@ -214,13 +226,32 @@ export function Hero() {
             </a>
           </div>
         </div>
+
+        {/* Right Side: 3D Pulse Core Graphic */}
+        <div className="mt-8 flex-1 lg:mt-0">
+          <div className="relative rounded-2xl border border-primary/20 bg-card/40 p-2 shadow-[0_0_40px_rgba(0,255,157,0.08)] backdrop-blur-md">
+            {/* Top Bar for 3D Window Pane */}
+            <div className="flex items-center justify-between border-b border-border/40 bg-surface/60 px-4 py-2">
+              <div className="flex gap-1.5">
+                <span className="h-2.5 w-2.5 rounded-full bg-red-500/80" />
+                <span className="h-2.5 w-2.5 rounded-full bg-yellow-500/80" />
+                <span className="h-2.5 w-2.5 rounded-full bg-green-500/80" />
+              </div>
+              <span className="font-mono text-[11px] text-muted-foreground">core_pulse_visualizer.3js</span>
+            </div>
+
+            {/* 3D Pulse Canvas */}
+            <PulseNode />
+          </div>
+        </div>
       </div>
 
-      {/* Scroll Hint */}
-      <div className="pointer-events-none absolute bottom-6 left-1/2 z-10 -translate-x-1/2 font-mono text-[10px] text-muted-foreground">
+      {/* Scroll Hint Footer */}
+      <div className="pointer-events-none absolute bottom-4 left-1/2 z-10 -translate-x-1/2 font-mono text-[10px] text-muted-foreground">
         {scrollHint}
         <span className="animate-blink text-primary">▋</span>
       </div>
     </section>
   );
 }
+

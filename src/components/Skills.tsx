@@ -1,7 +1,6 @@
 import { useRef, useState, useEffect } from "react";
+import { useInView } from "framer-motion";
 import { Section } from "./Section";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 // ── Content definition ──────────────────────────────────────────────────────
 
@@ -46,36 +45,19 @@ const LINES: Line[] = [
   { type: "item",   text: "XOR Cryptanalysis, Linux Privilege Escalation" },
 ];
 
-// ── Component ────────────────────────────────────────────────────────────────
-
 export function Skills() {
   const termRef = useRef<HTMLDivElement>(null);
-  const [inView, setInView] = useState(false);
+  const inView = useInView(termRef, { once: true, margin: "-10% 0px" });
 
-  // Typing state machine
   type Phase = "idle" | "cmd" | "content" | "done";
-  const [phase,        setPhase]        = useState<Phase>("idle");
-  const [cmdChars,     setCmdChars]     = useState(0);
+  const [phase, setPhase] = useState<Phase>("idle");
+  const [cmdChars, setCmdChars] = useState(0);
   const [visibleLines, setVisibleLines] = useState(0);
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      ScrollTrigger.create({
-        trigger: termRef.current,
-        start: "top 85%",
-        once: true,
-        onEnter: () => setInView(true)
-      });
-    }, termRef);
-    return () => ctx.revert();
-  }, []);
-
-  // Trigger on first viewport entry
   useEffect(() => {
     if (inView && phase === "idle") setPhase("cmd");
   }, [inView, phase]);
 
-  // Phase 1 – type the command
   useEffect(() => {
     if (phase !== "cmd") return;
     let i = cmdChars;
@@ -88,10 +70,8 @@ export function Skills() {
       }
     }, 36);
     return () => clearInterval(id);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [phase]);
 
-  // Phase 2 – reveal lines one by one
   useEffect(() => {
     if (phase !== "content") return;
     let l = 0;
@@ -102,11 +82,9 @@ export function Skills() {
         clearInterval(id);
         setPhase("done");
       }
-    }, 52);
+    }, 45);
     return () => clearInterval(id);
   }, [phase]);
-
-  // ── Render ──────────────────────────────────────────────────────────────
 
   const renderLine = (ln: Line, i: number) => {
     if (ln.type === "gap") return <div key={i} className="h-2" />;
@@ -118,7 +96,6 @@ export function Skills() {
         </p>
       );
 
-    // item
     return (
       <p key={i} className="pl-2 text-muted-foreground">
         <span className="text-primary/60 mr-1.5 select-none">›</span>
@@ -130,10 +107,7 @@ export function Skills() {
   return (
     <Section id="skills" index="02" title="skills.arsenal">
       <div ref={termRef} className="mx-auto max-w-3xl">
-        {/* ── Terminal window ── */}
-        <div className="overflow-hidden rounded-lg border border-border bg-card/60 shadow-[0_0_50px_rgba(0,255,157,0.04)]">
-
-          {/* Top bar */}
+        <div className="overflow-hidden rounded-lg border border-border bg-card/60 shadow-[0_0_50px_rgba(0,255,157,0.04)] backdrop-blur-sm">
           <div className="flex items-center gap-1.5 border-b border-border bg-surface/60 px-4 py-3">
             <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
             <span className="h-2.5 w-2.5 rounded-full bg-[#ffbd2e]" />
@@ -143,10 +117,7 @@ export function Skills() {
             </span>
           </div>
 
-          {/* Terminal body */}
           <div className="min-h-[420px] p-5 font-mono text-sm">
-
-            {/* Command line */}
             <div className="flex items-center gap-1">
               <span className="text-primary/70 select-none">$</span>
               <span className="ml-1 text-foreground/90">
@@ -155,14 +126,12 @@ export function Skills() {
               {phase === "cmd" && <span className="term-cursor" />}
             </div>
 
-            {/* Output lines */}
             {(phase === "content" || phase === "done") && (
               <div className="mt-1 space-y-0.5">
                 {LINES.slice(0, visibleLines).map((ln, i) => renderLine(ln, i))}
               </div>
             )}
 
-            {/* Blinking prompt at end */}
             {phase === "done" && (
               <div className="mt-4 flex items-center gap-1">
                 <span className="text-primary/70 select-none">$</span>
@@ -177,3 +146,4 @@ export function Skills() {
     </Section>
   );
 }
+

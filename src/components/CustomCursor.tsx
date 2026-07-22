@@ -7,7 +7,7 @@ export function CustomCursor() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Check if device has a touch screen (mobile) to disable custom cursor
+    // Disable on touch devices
     if (window.matchMedia("(pointer: coarse)").matches) return;
 
     setIsVisible(true);
@@ -16,68 +16,63 @@ export function CustomCursor() {
     const dot = dotRef.current;
 
     const onMouseMove = (e: MouseEvent) => {
-      // Fast dot
       gsap.to(dot, {
         x: e.clientX,
         y: e.clientY,
-        duration: 0.1,
+        duration: 0.05,
         ease: "power2.out"
       });
       
-      // Lagging glowing ring
       gsap.to(cursor, {
         x: e.clientX,
         y: e.clientY,
-        duration: 0.5,
-        ease: "power4.out"
+        duration: 0.35,
+        ease: "power3.out"
       });
     };
 
     const onMouseDown = () => {
-      gsap.to(cursor, { scale: 0.5, duration: 0.2 });
-      gsap.to(dot, { scale: 1.5, duration: 0.2 });
+      gsap.to(cursor, { scale: 0.6, duration: 0.15 });
+      gsap.to(dot, { scale: 1.8, duration: 0.15 });
     };
 
     const onMouseUp = () => {
-      gsap.to(cursor, { scale: 1, duration: 0.2 });
-      gsap.to(dot, { scale: 1, duration: 0.2 });
-    };
-
-    const onMouseLeave = () => {
-      gsap.to([cursor, dot], { opacity: 0, duration: 0.3 });
-    };
-
-    const onMouseEnter = () => {
-      gsap.to([cursor, dot], { opacity: 1, duration: 0.3 });
+      gsap.to(cursor, { scale: 1, duration: 0.15 });
+      gsap.to(dot, { scale: 1, duration: 0.15 });
     };
 
     window.addEventListener("mousemove", onMouseMove);
     window.addEventListener("mousedown", onMouseDown);
     window.addEventListener("mouseup", onMouseUp);
-    document.addEventListener("mouseleave", onMouseLeave);
-    document.addEventListener("mouseenter", onMouseEnter);
 
     return () => {
       window.removeEventListener("mousemove", onMouseMove);
       window.removeEventListener("mousedown", onMouseDown);
       window.removeEventListener("mouseup", onMouseUp);
-      document.removeEventListener("mouseleave", onMouseLeave);
-      document.removeEventListener("mouseenter", onMouseEnter);
     };
   }, []);
 
   if (!isVisible) return null;
 
   return (
-    <>
+    <div className="pointer-events-none fixed inset-0 z-[999999] overflow-hidden">
+      {/* Outer lagging ring */}
       <div
         ref={cursorRef}
-        className="pointer-events-none fixed top-0 left-0 z-[9999] h-8 w-8 -translate-x-1/2 -translate-y-1/2 rounded-full border border-primary/50 mix-blend-screen transition-opacity duration-300 shadow-[0_0_10px_rgba(0,255,157,0.3)]"
-      />
+        className="pointer-events-none absolute top-0 left-0 h-9 w-9 -translate-x-1/2 -translate-y-1/2 rounded-full border border-primary/80 bg-primary/10 shadow-[0_0_15px_rgba(0,255,157,0.5)] backdrop-blur-[1px]"
+      >
+        <div className="absolute top-1/2 left-0 h-[1px] w-1.5 -translate-y-1/2 bg-primary/80" />
+        <div className="absolute top-1/2 right-0 h-[1px] w-1.5 -translate-y-1/2 bg-primary/80" />
+        <div className="absolute top-0 left-1/2 h-1.5 w-[1px] -translate-x-1/2 bg-primary/80" />
+        <div className="absolute bottom-0 left-1/2 h-1.5 w-[1px] -translate-x-1/2 bg-primary/80" />
+      </div>
+
+      {/* Inner fast dot */}
       <div
         ref={dotRef}
-        className="pointer-events-none fixed top-0 left-0 z-[10000] h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary mix-blend-screen transition-opacity duration-300 shadow-[0_0_8px_rgba(0,255,157,0.8)]"
+        className="pointer-events-none absolute top-0 left-0 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary shadow-[0_0_10px_#00ff9d]"
       />
-    </>
+    </div>
   );
 }
+
