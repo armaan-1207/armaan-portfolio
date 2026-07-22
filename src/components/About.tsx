@@ -39,13 +39,13 @@ export function About() {
               <span className="text-secondary font-bold">$ cat profile.summary</span>
             </p>
             <p>
-              I am a dedicated <span className="text-primary font-semibold">Cybersecurity Enthusiast</span> and <span className="text-foreground font-semibold">Electronics and Computer Engineering (ENC)</span> undergraduate specializing in <span className="text-secondary font-semibold">penetration testing, network defense, and vulnerability research</span>.
+              I am a dedicated <span className="text-primary font-semibold">Cybersecurity Enthusiast</span> and <span className="text-foreground font-semibold">Electronics and Computer Engineering (ENC)</span> undergraduate specializing in <span className="text-secondary font-semibold">penetration testing, network defense and vulnerability research</span>.
             </p>
             <p>
-              Driven by an insatiable curiosity for breaking complex systems to understand how they truly operate beneath the surface, I spend countless hours dissecting network protocols, auditing web architectures, and solving intricate Capture The Flag (CTF) challenges.
+              Driven by an insatiable curiosity for breaking complex systems to understand how they truly operate beneath the surface, I spend countless hours dissecting network protocols, auditing web architectures and solving intricate Capture The Flag (CTF) challenges.
             </p>
             <p className="border-l-2 border-primary/60 pl-3.5 italic text-foreground/90 bg-primary/5 py-2.5 rounded-r shadow-inner">
-              "Security is not a product, but a continuous process of adversarial thinking and relentless exploration."
+              "Security is not a product but a continuous process of adversarial thinking and relentless exploration."
             </p>
 
             {/* Core Focus Tags */}

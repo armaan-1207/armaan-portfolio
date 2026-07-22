@@ -10,8 +10,8 @@ const CERTS = [
   },
   {
     emoji: "🛡",
-    name: "EC-Council Cybersecurity Workshop: Steganography & Network Forensics",
-    issuer: "EC-Council · 1 CPE Credit",
+    name: "EC Council Cybersecurity Workshop: Steganography & Network Forensics",
+    issuer: "EC Council · 1 CPE Credit",
     accent: "secondary",
   },
   {

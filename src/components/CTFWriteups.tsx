@@ -35,11 +35,11 @@ const WRITEUPS: Writeup[] = [
   {
     name: "Sorting Hat Blocks",
     cats: ["web"],
-    displayCat: "Web Exploitation / AES-ECB",
+    displayCat: "Web Exploitation / AES ECB",
     diff: "medium",
     summary:
-      "Broke AES-ECB encryption using a byte-at-a-time attack, recovering a hidden flag character by character via a custom Python script.",
-    pdf: "/Writeups/sorting-hat-blocks.pdf",
+      "Broke AES ECB encryption using a byte at a time attack, recovering a hidden flag character by character via a custom Python script.",
+    pdf: "/Writeups/sorting hat blocks.pdf",
   },
   {
     name: "Riddle's Diary",
@@ -47,8 +47,8 @@ const WRITEUPS: Writeup[] = [
     displayCat: "Web Exploitation / SSTI",
     diff: "medium",
     summary:
-      "Exploited a Jinja2 Server-Side Template Injection by bypassing a keyword blocklist, then decrypted a Vigenère-ciphered password to unlock a protected archive.",
-    pdf: "/Writeups/riddles-diary.pdf",
+      "Exploited a Jinja2 Server Side Template Injection by bypassing a keyword blocklist, then decrypted a Vigenère ciphered password to unlock a protected archive.",
+    pdf: "/Writeups/riddles diary.pdf",
   },
   {
     name: "Fragments of Truth",
@@ -56,8 +56,8 @@ const WRITEUPS: Writeup[] = [
     displayCat: "Audio Forensics / Steganography",
     diff: "medium",
     summary:
-      "Extracted three stacked layers of hidden data from an audio file — spectrogram text, Morse code, and an SSTV-encoded QR code — to reach the final flag.",
-    pdf: "/Writeups/fragments-of-truth.pdf",
+      "Extracted three stacked layers of hidden data from an audio file  spectrogram text, Morse code, and an SSTV encoded QR code to reach the final flag.",
+    pdf: "/Writeups/fragments of truth.pdf",
   },
   {
     name: "The Pensieve Does Not Forget",
@@ -65,8 +65,8 @@ const WRITEUPS: Writeup[] = [
     displayCat: "Network Forensics / Steganography",
     diff: "hard",
     summary:
-      "Carved a hidden ZIP from a raw packet capture, recovered a password from the file's own header, and decrypted a Beaufort cipher to uncover the buried flag.",
-    pdf: "/Writeups/the-pensieve.pdf",
+      "Carved a hidden ZIP from a raw packet capture, recovered a password from the file's own header and decrypted a Beaufort cipher to uncover the buried flag.",
+    pdf: "/Writeups/the pensieve.pdf",
   },
 ];
 

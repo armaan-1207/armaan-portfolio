@@ -6,14 +6,14 @@ import { Section } from "./Section";
 const ACTIVITIES = [
   {
     Icon: Terminal,
-    role: "Self-Directed Cybersecurity Foundations Program",
+    role: "Self Directed Cybersecurity Foundations Program",
     org: "Independent Security Research",
     period: "June 2026 – Present",
     accent: "primary" as const,
     bullets: [
       "160+ hours of structured practice: completed TryHackMe rooms (DNS in Detail, HTTP in Detail, Linux Fundamentals, Linux Strength Training, Bash Scripting).",
       "Cracked complex hashes with John the Ripper; cleared 10 levels of OverTheWire's Bandit wargame.",
-      "Completed PortSwigger's 18-lab SQL Injection curriculum and TryHackMe's Burp Suite: Repeater room.",
+      "Completed PortSwigger's  18 SQL Injection Labs and TryHackMe's Burp Suite: Repeater room.",
     ],
   },
   {
@@ -23,9 +23,9 @@ const ACTIVITIES = [
     period: "Nov 2025 – Present",
     accent: "secondary" as const,
     bullets: [
-      "Contributed across Cyber, Marketing, and Design departments for HackOWASP 8.0 — a 24-hour national hackathon.",
-      "Solved 7+ PicoCTF challenges across web exploitation, cryptography, forensics, and reverse engineering.",
-      "Exploited OWASP Juice Shop locally for hands-on web vulnerability testing and payload analysis.",
+      "Contributed across Cyber, Marketing, and Design departments for HackOWASP 8.0, a 24 hour national hackathon.",
+      "Solved 7+ PicoCTF challenges across web exploitation, cryptography, forensics and reverse engineering.",
+      "Exploited OWASP Juice Shop locally for hands on web vulnerability testing and payload analysis.",
     ],
   },
   {
@@ -35,7 +35,7 @@ const ACTIVITIES = [
     period: "Oct 2025 – Present",
     accent: "primary" as const,
     bullets: [
-      "Participated in Linux and open-source workshops focused on CLI tooling, kernel architecture, and system administration initiatives.",
+      "Participated in Linux and open source workshops focused on CLI tooling and kernel architecture .",
     ],
   },
 ] as const;

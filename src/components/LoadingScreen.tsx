@@ -41,7 +41,7 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
       containerRef.current.style.transform = "translateY(-100%)";
       containerRef.current.style.opacity = "0";
     }
-    setTimeout(onDone, 650);
+    setTimeout(onDone, 800);
   };
 
   useEffect(() => {
