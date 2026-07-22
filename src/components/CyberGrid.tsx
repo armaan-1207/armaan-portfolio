@@ -1,4 +1,4 @@
-import { useRef, useMemo } from "react";
+import { useRef, useMemo, useEffect, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
@@ -103,6 +103,10 @@ function CyberWave() {
 }
 
 export function CyberGrid() {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  if (!mounted) return null;
+
   return (
     <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
       <Canvas

@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
@@ -73,6 +73,10 @@ function PulseSphere() {
 }
 
 export function PulseNode() {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  if (!mounted) return <div className="h-[380px] w-full sm:h-[450px] lg:h-[500px]" />;
+
   return (
     <div className="h-[380px] w-full sm:h-[450px] lg:h-[500px]">
       <Canvas camera={{ position: [0, 0, 4.5], fov: 50 }}>
