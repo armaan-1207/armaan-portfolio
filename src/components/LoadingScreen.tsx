@@ -62,18 +62,19 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
         }
 
         // Realistic variable speed (pauses on heavy modules)
-        let delay = 110;
+        let delay = 180; // Default speed between normal log lines (was 110ms)
         if (nextLog?.includes("Security Auditing") || nextLog?.includes("LUKS Encrypted")) {
-          delay = 320;
+          delay = 550; // Heavy service pause (was 320ms)
         } else if (nextLog?.includes("BurpSuite") || nextLog?.includes("Hyprland")) {
-          delay = 280;
+          delay = 480; // Tool loading pause (was 280ms)
         } else if (nextLog?.includes("WELCOME TO KALI")) {
-          delay = 220;
+          delay = 400; // Banner highlight pause (was 220ms)
         }
 
         timeoutId = setTimeout(step, delay);
       } else {
-        timeoutId = setTimeout(handleFinish, 400);
+        // Final pause after all logs finish before the screen slides up into your Hero (was 400ms)
+        timeoutId = setTimeout(handleFinish, 900);
       }
     };
 
