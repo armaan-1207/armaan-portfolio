@@ -21,8 +21,6 @@ export function StatusBar() {
       <span className="text-primary/90 font-bold">SYSTEM:</span>
       <span className="text-foreground font-semibold">ONLINE</span>
       <span className="text-border">|</span>
-      <span className="text-secondary font-bold">ENC_CORE</span>
-      <span className="text-border">|</span>
       <span className="tabular-nums text-foreground/90 font-semibold">
         {hh}:{mm}:{ss}
       </span>
